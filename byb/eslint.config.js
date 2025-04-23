@@ -5,6 +5,18 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 
 export default [
   { ignores: ['dist'] },
+
+  // ✅ Node.js config for files like tailwind.config.js
+  {
+    files: ['tailwind.config.js', 'postcss.config.js', '*.cjs'],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.node,
+      sourceType: 'module',
+    },
+  },
+
+  // ✅ Browser + React config for your main app code
   {
     files: ['**/*.{js,jsx}'],
     languageOptions: {

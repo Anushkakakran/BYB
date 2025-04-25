@@ -1,17 +1,28 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+const [message,setMessage]= useState('');
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    console.log('Logging in with:', email, password);
-    setEmail('');
-    setPassword('');
-  };
 
+    try {
+      const response = await axios.post('/api/auth/login', { email, password });
+      setMessage(response.data.message || 'Login successful');
+      
+      // Optional: store token if available
+      if (response.data.token) {
+        localStorage.setItem('token', response.data.token);
+      }
+    } catch (error) {
+      const errMsg = error.response?.data?.message || 'Login failed';
+      setMessage(errMsg);
+    }
+  };
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <h2 className="text-3xl  text-darkBlue font-bold mb-6">Login</h2>
@@ -45,6 +56,11 @@ function Login() {
           Login
         </button>
       </form>
+      {message && (
+  <p className={`mt-4 text-sm font-medium ${message.includes('success') ? 'text-green-600' : 'text-red-600'}`}>
+    {message}
+  </p>
+)}
       <p className="mt-4">
         Don't have an account? <Link to="/register" className="text-royalBlue hover:underline">Register</Link>
       </p>

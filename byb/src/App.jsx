@@ -6,7 +6,7 @@ import Login from './Components/Login';
 import ContactUs from './pages/ContactUs';
 import Home from './pages/Home';
 import AboutUs from './pages/AboutUs';
-import Book from './Book';
+import Book from './pages/Book';
 
 function App() {
   return (

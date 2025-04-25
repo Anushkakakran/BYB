@@ -17,8 +17,8 @@ module.exports = {
       white: "#FFFFFF",
       black : "#000000",
       bgDark: '#1a1a1a',
-      LightGray:	"#D3D3D3"
-		
+      LightGray:	"#D3D3D3",
+		  button : "#052159"
 		},
     extend: {},
   },

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -5,14 +6,22 @@ function Register() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [message,setmessage] = useState('');
 
-  const handleRegister = (e) => {
+  const handleRegister = async(e) => {
     e.preventDefault();
-    console.log('Registering with:', username, email, password);
-    
-    setUsername('');
-    setEmail('');
-    setPassword('');
+     try {
+      const response = await axios.post('/api/auth/register',{
+        username,
+        email,
+        password
+      });
+      setmessage(response.data.message || 'Registration Sucessful');
+
+     } catch (error) {
+      const errmsg = error.response?.data.message || 'Registration failed';
+      setmessage(errmsg);
+     }
   };
 
   return (
@@ -62,6 +71,11 @@ function Register() {
       <p className="mt-4">
         Already have an account? <Link to="/login" className="text-royalBlue hover:underline">Login</Link>
       </p>
+      {message && (
+  <p className={`mt-4 text-sm font-medium ${message.includes('success') ? 'text-green-600' : 'text-red-600'}`}>
+    {message}
+  </p>
+)}
     </div>
   );
 }

@@ -19,7 +19,7 @@ function Navbar() {
 
   return (
     <>
-      <nav className="bg-gradient-to-r from-darkBlue to-accent text-white shadow w-full fixed top-0 z-50">
+      <nav className="bg-gradient-to-r from-darkBlue to-accent text-white shadow w-full fixed top-0  z-50">
         <div className="max-w-6xl mx-auto px-4 py-4 flex flex-wrap justify-between items-center">
           {/* Logo */}
           <Link to='/'>
@@ -37,7 +37,7 @@ function Navbar() {
           </div>
 
           {/* Desktop Menu */}
-          <ul className="hidden md:flex items-center space-x-6 font-bold text-lg whitespace-nowrap  ml-auto">
+          <ul className="hidden md:flex items-center space-x-9 font-bold text-lg whitespace-nowrap  ml-auto">
             <Link to="/">
               <li className="flex  items-center space-x-2 hover:text-LightGray">
                 <span>Home</span>
@@ -62,25 +62,20 @@ function Navbar() {
                 <IoIosContact />
               </li>
             </Link>
-            {/* Dropdown */}
+
             <li className="relative group">
               <div className="flex  items-center space-x-1 cursor-pointer hover:text-LightGray">
-                <span>Login</span>
-                <IoMdArrowDropdown />
+               <Link to = '/login'>Login</Link>
               </div>
-              <ul className="absolute left-0 mt-2 w-40 bg-accent text-white rounded shadow opacity-0 group-hover:opacity-100 group-hover:visible z-50">
-                <li>
-                  <Link to="/register" className="block px-4 py-2 hover:text-LightGray" onClick={handleLinkClick}>
-                    For Bouncer
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/customer-login" className="block px-4 py-2 hover:text-LightGray" onClick={handleLinkClick}>
-                    For Customer
-                  </Link>
-                </li>
-              </ul>
             </li>
+            <li>
+         <Link to="/register"
+         className="bg-white text-darkBlue px-4 py-2 rounded-full shadow-sm border border-LightGray hover:bg-LightGray transition"
+         >
+           Register
+          </Link>
+           </li>
+
           </ul>
         </div>
 
@@ -104,28 +99,23 @@ function Navbar() {
               <IoIosContact />
             </li>
             <li className="relative">
-              <div className="cursor-pointer" onClick={() => setLoginDropdownOpen(!loginDropdownOpen)}>
-                <span className="flex items-center">Login <IoMdArrowDropdown className="ml-1" /></span>
+              <div className="cursor-pointer">
+              <Link to = '/login'>Login</Link>
               </div>
-              {loginDropdownOpen && (
-                <ul className="ml-4 mt-2 space-y-1 bg-royalBlue rounded shadow z-50">
-                  <li>
-                    <Link to="/register" className="block px-2 py-1 hover:text-LightGray" onClick={handleLinkClick}>
-                      For Bouncer
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/customer-login" className="block px-2 py-1 hover:text-LightGray" onClick={handleLinkClick}>
-                      For Customer
-                    </Link>
-                  </li>
-                </ul>
-              )}
-            </li>
+           </li>
+           <li className="relative">
+        <Link to="/register"
+       className="inline-block bg-white text-darkBlue text-sm px-3 py-2 rounded-full shadow-sm border border-LightGray hover:bg-LightGray transition"
+          >
+          Register
+         </Link>
+           </li>
+
+
           </ul>
         </div>
       </nav>
-      <div className="pt-28"></div>
+      <div className="pt-20"></div>
     </>
   );
 }

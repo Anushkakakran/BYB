@@ -26,9 +26,12 @@ function Navbar() {
   };
 
   return (
-    <>
+
       <nav className="bg-gradient-to-r from-darkBlue to-accent text-white shadow w-full fixed top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+
+      <nav className="bg-gradient-to-r from-darkBlue to-accent text-white shadow w-full fixed top-0  z-50">
+        <div className="max-w-6xl mx-auto px-4 py-4 flex flex-wrap justify-between items-center>
           {/* Logo */}
           <Link to='/'>
             <div className="flex items-center flex-shrink-0">
@@ -44,9 +47,15 @@ function Navbar() {
           </div>
 
           {/* Desktop Menu */}
+
           <ul className="hidden md:flex items-center space-x-3 font-bold text-sm sm:text-base whitespace-nowrap ml-auto">
             <Link to="/" onClick={handleLinkClick}>
               <li className="flex items-center space-x-1 hover:text-gray-300">
+
+          <ul className="hidden md:flex items-center space-x-9 font-bold text-lg whitespace-nowrap  ml-auto">
+            <Link to="/">
+              <li className="flex  items-center space-x-2 hover:text-LightGray">
+
                 <span>Home</span>
                 <FaHome />
               </li>
@@ -69,6 +78,7 @@ function Navbar() {
                 <IoIosContact />
               </li>
             </Link>
+
             <button onClick={moveToRegister} className="border-2 border-black w-20 h-7 rounded-xl bg-button hover:bg-gray-700">
               <li className="flex items-center justify-center hover:text-gray-300">
                 <span>Register</span>
@@ -79,6 +89,21 @@ function Navbar() {
                 <span>Login</span>
               </li>
             </button>
+
+
+            <li className="relative group">
+              <div className="flex  items-center space-x-1 cursor-pointer hover:text-LightGray">
+               <Link to = '/login'>Login</Link>
+              </div>
+            </li>
+            <li>
+         <Link to="/register"
+         className="bg-white text-darkBlue px-4 py-2 rounded-full shadow-sm border border-LightGray hover:bg-LightGray transition >
+           Register
+          </Link>
+           </li>
+
+
           </ul>
         </div>
 
@@ -101,6 +126,7 @@ function Navbar() {
               <Link to="/contact" onClick={handleLinkClick}>Contact Us</Link>
               <IoIosContact />
             </li>
+
             <button onClick={moveToRegister} className="border-2 border-black w-24 h-8 rounded-xl bg-button hover:bg-gray-700">
               <li className="flex items-center space-x-2 hover:text-gray-300">
                 <span>Register</span>
@@ -115,6 +141,26 @@ function Navbar() {
         </div>
       </nav>
       <div className="pt-16"></div>
+
+            <li className="relative">
+              <div className="cursor-pointer">
+              <Link to = '/login'>Login</Link>
+              </div>
+           </li>
+           <li className="relative">
+        <Link to="/register"
+       className="inline-block bg-white text-darkBlue text-sm px-3 py-2 rounded-full shadow-sm border border-LightGray hover:bg-LightGray transition"
+          >
+          Register
+         </Link>
+           </li>
+
+
+          </ul>
+        </div>
+      </nav>
+      <div className="pt-20"></div>
+
     </>
   );
 }

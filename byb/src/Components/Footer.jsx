@@ -4,12 +4,12 @@ import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/f
 
 const Footer = () => {
   return (
-    <footer className="bg-darkBlue text-white py-10 px-6">
+    <footer className="bg-black text-white py-10 px-6">
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
         {/* Company Info */}
         <div>
           <h3 className="text-xl font-bold mb-4">Book Your Bouncer</h3>
-          <p className="text-sm text-gray-300">
+          <p className="text-sm">
             Trusted security services for events, venues, and VIPs across India. Your safety is our priority.
           </p>
         </div>
@@ -56,7 +56,7 @@ const Footer = () => {
       </div>
 
       {/* Bottom Bar */}
-      <div className="mt-10 border-t border-gray-700 pt-6 text-center text-sm text-gray-400">
+      <div className="mt-10 border-t border-gray pt-6 text-center text-sm text-gray-400">
         <p>© {new Date().getFullYear()} Book Your Bouncer. All rights reserved.</p>
         <div className="mt-2 space-x-4">
           <Link to="/privacy-policy" className="hover:underline">Privacy Policy</Link>

@@ -51,18 +51,18 @@ const [message,setMessage]= useState('');
         </div>
         <button
           type="submit"
-          className="w-full bg-royalBlue hover:bg-accent text-white font-semibold py-3 rounded-md transition duration-300"
+          className="w-full bg-black hover:bg-gray text-white font-semibold py-3 rounded-md transition duration-300"
         >
           Login
         </button>
       </form>
       {message && (
-  <p className={`mt-4 text-sm font-medium ${message.includes('success') ? 'text-green-600' : 'text-red-600'}`}>
+  <p className={`mt-4 text-sm font-medium ${message.includes('success') ? 'text-green' : 'text-red'}`}>
     {message}
   </p>
 )}
       <p className="mt-4">
-        Don't have an account? <Link to="/register" className="text-royalBlue hover:underline">Register</Link>
+        Don't have an account? <Link to="/sign-up" className="text-red hover:underline">Register</Link>
       </p>
     </div>
   );

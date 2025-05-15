@@ -4,10 +4,11 @@ import heroImage from "../assets/hero-bouncer.jpg";
 import { GiSecurityGate } from "react-icons/gi";
 import { Ri24HoursFill } from "react-icons/ri";
 import { FaShieldAlt, FaUser } from "react-icons/fa";
+import ChooseUs from "../Components/ChooseUs";
 
 function Home() {
   return (
-    <div className="min-h-screen top-0 bg-gray-100 text-darkBlue">
+    <div className="min-h-screen top-0  text-black">
       {/* Hero Section */}
       <section
         className="relative bg-cover bg-center bg-no-repeat h-screen flex items-center justify-center text-white mb-16"
@@ -24,7 +25,7 @@ function Home() {
           </p>
           <Link
             to="/Book-Bouncer"
-            className="bg-white text-black px-8 py-4 rounded-full shadow-lg hover:bg-LightGray transition"
+            className="bg-white text-black px-8 py-4 rounded-full shadow-lg hover:text-gray transition"
           >
             Book Now
           </Link>
@@ -82,56 +83,18 @@ function Home() {
         </p>
         <Link
           to="/Book-Bouncer"
-          className="bg-white text-black px-8 py-4 rounded-full shadow-lg hover:bg-LightGray transition"
+          className="bg-white text-black px-8 py-4 rounded-full shadow-lg hover:text-gray transition"
         >
           Book Now
         </Link>
       </section>
 
       {/* Why Choose Us Section */}
-      <section className="bg-white py-16 px-4 text-center mb-16">
-        <h2 className="text-3xl sm:text-4xl font-bold text-darkBlue mb-12">
-          Why Choose Us?
-        </h2>
-        <div className="max-w-6xl mx-auto grid gap-12 sm:grid-cols-2 md:grid-cols-3">
-          {[
-            {
-              icon: (
-                <GiSecurityGate className="w-16 h-16 text-darkBlue mx-auto mb-4" />
-              ),
-              title: "Trained Professionals",
-              desc: "All bouncers are verified, trained, and experienced in crowd control.",
-            },
-            {
-              icon: (
-                <Ri24HoursFill className="w-16 h-16 text-darkBlue mx-auto mb-4" />
-              ),
-              title: "24/7 Availability",
-              desc: "Book anytime, anywhere. We’re available for all kinds of events.",
-            },
-            {
-              icon: (
-                <FaShieldAlt className="w-16 h-16 text-darkBlue mx-auto mb-4" />
-              ),
-              title: "Trusted & Reliable",
-              desc: "We prioritize your safety and satisfaction. Trusted by 1000+ clients.",
-            },
-          ].map((item, index) => (
-            <div
-              key={index}
-              className="p-6 rounded-lg shadow-md border border-LightGray"
-            >
-              {item.icon}
-              <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
-              <p className="text-sm text-royalBlue">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+    <ChooseUs/>
 
       {/* Newsletter Section */}
       <section className="relative text-white py-16 px-4 text-center mb-16">
-        <div className="absolute inset-0 bg-gradient-to-r from-darkBlue to-royalBlue clip-shape"></div>
+        <div className="absolute inset-0 bg-black clip-shape"></div>
         <div className="relative z-10">
           <h2 className="text-3xl font-bold mb-6">Stay Updated!</h2>
           <p className="mb-6">
@@ -146,7 +109,7 @@ function Home() {
             />
             <button
               type="submit"
-              className="bg-white text-darkBlue px-8 py-4 rounded-full font-semibold hover:bg-LightGray transition"
+              className="bg-white text-black px-8 py-4 rounded-full font-semibold hover:text-gray transition"
             >
               Subscribe
             </button>
@@ -162,7 +125,7 @@ function Home() {
 
       {/* Testimonials Section */}
       <section className="py-16 px-4 bg-gray-100 text-center mb-16">
-        <h2 className="text-3xl font-semibold text-darkBlue mb-12">
+        <h2 className="text-3xl font-semibold text-black mb-12">
           What Our Clients Say
         </h2>
         <div className="max-w-6xl mx-auto grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
@@ -197,7 +160,7 @@ function Home() {
       </section>
 
       {/* Call to Action Section */}
-      <section className="bg-darkBlue text-white py-16 text-center px-4 mb-16">
+      <section className="bg-black text-white py-16 text-center px-4 mb-16">
         <h2 className="text-2xl sm:text-3xl font-semibold mb-6">
           Ready to Secure Your Event?
         </h2>
@@ -206,7 +169,7 @@ function Home() {
         </p>
         <Link
           to="/Book-Bouncer"
-          className="bg-white text-darkBlue px-8 py-4 rounded-full hover:bg-LightGray transition"
+          className="bg-white text-black px-8 py-4 rounded-full hover:text-gray transition"
         >
           Book Your Bouncer
         </Link>

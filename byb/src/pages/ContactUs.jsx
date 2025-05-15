@@ -2,15 +2,15 @@ import React from "react";
 
 const ContactForm = () => {
   return (
-    <div className="bg-lightGray min-h-screen flex items-center justify-center px-4 py-16">
+    <div className="bg-white min-h-screen flex items-center justify-center px-4 py-16">
       <div className="bg-white w-full max-w-5xl rounded-xl shadow-md p-8">
-        <h2 className="text-3xl font-bold text-center p-6 text-darkBlue mb-6">
+        <h2 className="text-3xl font-bold text-center p-6 text-black mb-6">
           Contact Us
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <h2 className="text-2xl font-semibold mb-4 text-darkBlue">
+            <h2 className="text-2xl font-semibold mb-4 text-black">
               Get in Touch
             </h2>
             <ul className="space-y-3 text-black text-sm">
@@ -28,12 +28,12 @@ const ContactForm = () => {
 
           <form className="space-y-5">
             <div>
-              <label className="block text-sm font-semibold text-darkBlue mb-1">
+              <label className="block text-sm font-semibold text-black mb-1">
                 Full Name
               </label>
               <input
                 type="text"
-                className="w-full border border-lightGray rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-accent"
+                className="w-full border border-gray rounded-md p-3"
                 placeholder="Full name"
               />
             </div>
@@ -44,36 +44,36 @@ const ContactForm = () => {
               </label>
               <input
                 type="email"
-                className="w-full border border-lightGray rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-accent"
+                className="w-full border border-gray  rounded-md p-3 "
                 placeholder="Email"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-darkBlue mb-1">
+              <label className="block text-sm font-semibold text-black mb-1">
                 Phone Number
               </label>
               <input
                 type="tel"
-                className="w-full border border-lightGray rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-accent"
+                className="w-full border border-gray  rounded-md p-3"
                 placeholder="Phone number"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-darkBlue mb-1">
+              <label className="block text-sm font-semibold text-black mb-1">
                 Message
               </label>
               <textarea
                 rows="4"
-                className="w-full border border-lightGray rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-accent"
+                className="w-full border border-gray  rounded-md p-3"
                 placeholder="Write your message here..."
               ></textarea>
             </div>
 
             <button
               type="submit"
-              className="w-full bg-royalBlue hover:bg-accent text-white font-semibold py-3 rounded-md transition duration-300"
+              className="w-full bg-black hover:bg-gray text-white font-semibold py-3 rounded-md transition duration-300"
             >
               Send Message
             </button>

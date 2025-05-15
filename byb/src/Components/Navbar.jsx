@@ -17,6 +17,8 @@ function Navbar() {
     setLoginDropdownOpen(false);
   };
 
+  {/* ----- Home 2 ------- */}
+
   return (
     <>
       <nav className="bg-black text-white shadow w-full fixed top-0  z-50">

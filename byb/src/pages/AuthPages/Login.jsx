@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 const [message,setMessage]= useState('');
@@ -18,9 +20,14 @@ const [message,setMessage]= useState('');
       if (response.data.token) {
         localStorage.setItem('token', response.data.token);
       }
+      navigate("/");
     } catch (error) {
       const errMsg = error.response?.data?.message || 'Login failed';
       setMessage(errMsg);
+         // Redirect to sign-up only for specific error (e.g., user not found)
+    if (error.response?.status === 404) {
+      navigate("/sign-up");
+    }
     }
   };
   return (

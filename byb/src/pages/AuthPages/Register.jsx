@@ -26,7 +26,7 @@ function Register() {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
-      <h2 className="text-3xl  text-black font-bold mb-6">Sign Up</h2>
+      <h2 className="text-3xl  text-black font-bold mb-6">Sign Up As Customer</h2>
       <form onSubmit={handleRegister} className="w-full max-w-sm p-6 border rounded-lg shadow-lg">
         <div className="mb-4">
           <label className="block text-sm  text-black  font-semibold mb-2">Username</label>

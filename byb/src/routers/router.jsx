@@ -3,8 +3,8 @@ import App from "../App";
 import Home from "../pages/Home";
 import About from "../pages/AboutUs";
 import Book from "../pages/Book";
-import Register from "../Components/Register";
-import Login from "../Components/Login";
+import Register from "../pages/AuthPages/Register";
+import Login from "../pages/AuthPages/Login";
 import ContactForm from "../pages/ContactUs";
 
 const router = createBrowserRouter([
@@ -35,7 +35,7 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <ContactForm/>
-      }
+      },
     ]
   }
 ]);

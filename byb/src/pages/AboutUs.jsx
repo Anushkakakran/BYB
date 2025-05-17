@@ -1,9 +1,9 @@
-import React from 'react';
 import ChooseUs from '../Components/ChooseUs';
+import Button from "../Components/Button";
 
 const AboutUs = () => {
   return (
-    <div className="bg-LightGray text-black">
+    <div className=" text-black">
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-4 py-24 text-center bg-white rounded-b-3xl shadow-md mb-20">
         <h1 className="text-4xl md:text-5xl font-bold mb-6 text-royalBlue">
@@ -95,15 +95,13 @@ const AboutUs = () => {
       {/* CTA */}
       <section className="bg-accent py-24 px-4 text-center rounded-t-3xl">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-bold mb-6 text-white">Let's Secure Your Next Event</h2>
+          <h2 className="text-3xl font-bold mb-6 text-black">Let's Secure Your Next Event</h2>
           <p className="text-lg mb-8 text-LightGray">
             Book professional bouncers easily, reliably, and affordably.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-6">
-            <button className="bg-white text-accent font-semibold py-3 px-10 rounded-full hover:bg-LightGray transition">
-              Book Now
-            </button>
-            <button className="border border-white py-3 px-10 rounded-full font-semibold text-white hover:bg-white hover:text-accent transition">
+             <Button text="Book Now"/>
+            <button className="border border-white py-3 px-10 rounded-full font-semibold text-white hover:text-black bg-black hover:bg-lightGray transition">
               Get in Touch
             </button>
           </div>

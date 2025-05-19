@@ -5,6 +5,7 @@ import { GiSecurityGate } from "react-icons/gi";
 import { Ri24HoursFill } from "react-icons/ri";
 import { FaShieldAlt, FaUser } from "react-icons/fa";
 import ChooseUs from "../Components/ChooseUs";
+import Button from "../Components/Button";
 
 function Home() {
   return (
@@ -25,9 +26,9 @@ function Home() {
           </p>
           <Link
             to="/Book-Bouncer"
-            className="bg-white text-black px-8 py-4 rounded-full shadow-lg hover:text-gray transition"
+            
           >
-            Book Now
+            <Button text="Book Now"/>
           </Link>
         </div>
       </section>
@@ -83,9 +84,9 @@ function Home() {
         </p>
         <Link
           to="/Book-Bouncer"
-          className="bg-white text-black px-8 py-4 rounded-full shadow-lg hover:text-gray transition"
+        
         >
-          Book Now
+           <Button text="Book Now"/>
         </Link>
       </section>
 
@@ -169,9 +170,8 @@ function Home() {
         </p>
         <Link
           to="/Book-Bouncer"
-          className="bg-white text-black px-8 py-4 rounded-full hover:text-gray transition"
         >
-          Book Your Bouncer
+           <Button text="Book Your Bouncer"/>
         </Link>
       </section>
 

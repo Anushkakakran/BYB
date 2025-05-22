@@ -25,7 +25,7 @@ function Navbar() {
         {/* Desktop Menu */}
         <ul className="hidden md:flex items-center space-x-6 lg:space-x-8 text-sm lg:text-base font-medium">
           <li><Link to="/" className="hover:text-lightGray">Home</Link></li>
-          <li><Link to="/Book-Bouncer" className="hover:text-lightGray">Book Bouncer</Link></li>
+          <li><Link to="/book-bouncer" className="hover:text-lightGray">Book</Link></li>
           <li><Link to="/about-us" className="hover:text-lightGray">About Us</Link></li>
           <li><Link to="/contact" className="hover:text-lightGray">Contact Us</Link></li>
           <li><Link to="/login" className="hover:text-lightGray">Login</Link></li>
@@ -61,7 +61,7 @@ function Navbar() {
         </div>
         <ul className="flex flex-col mt-4 space-y-4 px-6 text-base font-medium">
           <li><Link to="/" onClick={handleLinkClick} className="hover:text-gray-300">Home</Link></li>
-          <li><Link to="/Book-Bouncer" onClick={handleLinkClick} className="hover:text-lightGray">Book Bouncer</Link></li>
+          <li><Link to="/book-bouncer" onClick={handleLinkClick} className="hover:text-lightGray">Book</Link></li>
           <li><Link to="/about-us" onClick={handleLinkClick} className="hover:text-lightGray">About Us</Link></li>
           <li><Link to="/contact" onClick={handleLinkClick} className="hover:text-lightGray">Contact Us</Link></li>
           <li><Link to="/login" onClick={handleLinkClick} className="hover:text-lightGray">Login</Link></li>

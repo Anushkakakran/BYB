@@ -6,6 +6,7 @@ import Book from "../pages/Book";
 import Register from "../pages/AuthPages/Register";
 import Login from "../pages/AuthPages/Login";
 import ContactForm from "../pages/ContactUs";
+import BouncerDetails from "../Components/BouncersDetails";
 
 const router = createBrowserRouter([
   {
@@ -17,8 +18,12 @@ const router = createBrowserRouter([
         element: <Home/>
       },
       {
-        path: "/Book-Bouncer",
-        element: <Book/>
+        path: "/book-bouncer",
+        element: <Book/>,
+      },
+      {
+        path: "/book-bouncer/:id",
+        element: <BouncerDetails/>
       },
       {
         path: "/about-us",

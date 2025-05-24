@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { HiMenu, HiX } from 'react-icons/hi';
-import Logoimg from '../assets/LOGO.jpg';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { HiMenu, HiX } from "react-icons/hi";
+import Logoimg from "../assets/LOGO.jpg";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -24,18 +24,41 @@ function Navbar() {
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex items-center space-x-6 lg:space-x-8 text-sm lg:text-base font-medium">
-          <li><Link to="/" className="hover:text-lightGray">Home</Link></li>
-          <li><Link to="/book-bouncer" className="hover:text-lightGray">Book</Link></li>
-          <li><Link to="/about-us" className="hover:text-lightGray">About Us</Link></li>
-          <li><Link to="/contact" className="hover:text-lightGray">Contact Us</Link></li>
-          <li><Link to="/login" className="hover:text-lightGray">Login</Link></li>
           <li>
-            <Link
-              to="/"
-              className="bg-white text-black px-3 py-1.5 rounded-full border hover:bg-lightGray transition text-sm"
+            <Link to="/" className="hover:text-lightGray">
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link to="/book-bouncer" className="hover:text-lightGray">
+              Book
+            </Link>
+          </li>
+          <li>
+            <Link to="/about-us" className="hover:text-lightGray">
+              About Us
+            </Link>
+          </li>
+          <li>
+            <Link to="/contact" className="hover:text-lightGray">
+              Contact Us
+            </Link>
+          </li>
+          <li>
+            <Link to="/login" className="hover:text-lightGray">
+              Login
+            </Link>
+          </li>
+          <li>
+            <a
+              href="https://orgfarm-bbb820bd93-dev-ed.develop.my.site.com"
+              onClick={handleLinkClick}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white text-black text-sm px-4 py-2 rounded-full border hover:bg-lightGray transition"
             >
               Register As A Bouncer
-            </Link>
+            </a>
           </li>
         </ul>
 
@@ -50,7 +73,7 @@ function Navbar() {
       {/* Mobile Slide-in Menu */}
       <div
         className={`fixed top-0 left-0 h-full w-64 bg-black text-white z-50 transform transition-transform duration-300 ease-in-out ${
-          menuOpen ? 'translate-x-0' : '-translate-x-full'
+          menuOpen ? "translate-x-0" : "-translate-x-full"
         } md:hidden`}
       >
         <div className="px-5 py-4 flex items-center justify-between border-b border-lightGray">
@@ -60,19 +83,61 @@ function Navbar() {
           </button>
         </div>
         <ul className="flex flex-col mt-4 space-y-4 px-6 text-base font-medium">
-          <li><Link to="/" onClick={handleLinkClick} className="hover:text-gray-300">Home</Link></li>
-          <li><Link to="/book-bouncer" onClick={handleLinkClick} className="hover:text-lightGray">Book</Link></li>
-          <li><Link to="/about-us" onClick={handleLinkClick} className="hover:text-lightGray">About Us</Link></li>
-          <li><Link to="/contact" onClick={handleLinkClick} className="hover:text-lightGray">Contact Us</Link></li>
-          <li><Link to="/login" onClick={handleLinkClick} className="hover:text-lightGray">Login</Link></li>
           <li>
             <Link
               to="/"
               onClick={handleLinkClick}
-              className="bg-white text-black text-sm px-4 py-2 rounded-full border hover:hover:bg-lightGray transition"
+              className="hover:text-gray-300"
+            >
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/book-bouncer"
+              onClick={handleLinkClick}
+              className="hover:text-lightGray"
+            >
+              Book
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/about-us"
+              onClick={handleLinkClick}
+              className="hover:text-lightGray"
+            >
+              About Us
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/contact"
+              onClick={handleLinkClick}
+              className="hover:text-lightGray"
+            >
+              Contact Us
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/login"
+              onClick={handleLinkClick}
+              className="hover:text-lightGray"
+            >
+              Login
+            </Link>
+          </li>
+          <li>
+            <a
+              href="https://orgfarm-bbb820bd93-dev-ed.develop.my.site.com"
+              onClick={handleLinkClick}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white text-black text-sm px-4 py-2 rounded-full border hover:bg-lightGray transition"
             >
               Register As A Bouncer
-            </Link>
+            </a>
           </li>
         </ul>
       </div>

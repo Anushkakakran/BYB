@@ -1,19 +1,47 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import heroImage from "../assets/hero-bouncer.jpg";
+import heroImage1 from "../assets/hero-bouncer.jpg";
+import heroImage2 from "../assets/hero.png";
+import heroImage3 from "../assets/hero2.png";
 import { GiSecurityGate } from "react-icons/gi";
 import { Ri24HoursFill } from "react-icons/ri";
 import { FaShieldAlt, FaUser } from "react-icons/fa";
 import ChooseUs from "../Components/ChooseUs";
 import Button from "../Components/Button";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 function Home() {
+  const heroImages = [
+    heroImage1,
+     heroImage2,
+      heroImage3,
+  ];
   return (
     <div className="min-h-screen top-0  text-black">
       {/* Hero Section */}
-      <section
-        className="relative bg-cover bg-center bg-no-repeat h-screen flex items-center justify-center text-white mb-16"
-        style={{ backgroundImage: `url(${heroImage})` }}
+  <section className="relative flex items-center justify-center text-white mb-16">
+  <Carousel
+    autoPlay
+    infiniteLoop
+    interval={3000}
+    showThumbs={false}
+    showStatus={false}
+    showArrows={false}
+    showIndicators={false}
+    swipeable={false}
+    emulateTouch={false}
+  >
+    {heroImages.map((image, index) => (
+      <div
+        key={index}
+        className="w-full h-screen relative flex items-center justify-center"
+        style={{
+          backgroundImage: `url(${image})`,
+          backgroundSize: "cover", 
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
       >
         <div className="absolute inset-0 bg-black bg-opacity-60"></div>
         <div className="relative z-10 text-center px-4">
@@ -24,14 +52,14 @@ function Home() {
             Trained, professional bouncers for all occasions — parties,
             weddings, corporate events, and more.
           </p>
-          <Link
-            to="/Book-Bouncer"
-            
-          >
-            <Button text="Book Now"/>
+          <Link to="/Book-Bouncer">
+            <Button text="Book Now" />
           </Link>
         </div>
-      </section>
+      </div>
+    ))}
+  </Carousel>
+</section>
 
       {/* Services Section */}
       <section className="py-16 px-4 max-w-6xl mx-auto mb-16">

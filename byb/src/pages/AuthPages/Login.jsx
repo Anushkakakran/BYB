@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { FcGoogle } from "react-icons/fc";
 
 function Login() {
   const navigate = useNavigate();
@@ -9,7 +10,7 @@ function Login() {
   const [message, setMessage] = useState("");
   const [user, setUser] = useState(null);
 
-  // 🔐 Check if already logged in via session
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -19,7 +20,7 @@ function Login() {
         const data = await res.json();
         if (data.user) {
           setUser(data.user);
-          navigate("/"); // Redirect if already logged in
+          navigate("/"); 
         }
       } catch (err) {
         console.log("Not logged in");
@@ -96,15 +97,18 @@ function Login() {
         </button>
 
         {/* 🔴 Google OAuth Button */}
-        <button
-          type="button"
-          onClick={() =>
-            window.open("http://localhost:5858/api/auth/google", "_self")
-          }
-          className="w-full mt-3 bg-red-600 hover:bg-red-700 text-black font-semibold py-3 rounded-md transition duration-300"
-        >
-          Sign in with Google
-        </button>
+  <button
+  type="button"
+  onClick={() =>
+    window.open("http://localhost:5858/api/auth/google", "_self")
+  }
+  className="w-full mt-3  hover:bg-red-700 text-black font-semibold py-3 rounded-md transition duration-300 flex items-center justify-center space-x-2 
+   border  border-gray "
+     >
+  <FcGoogle className="text-xl" />
+  <span>Sign in with Google</span>
+</button>
+
       </form>
 
       {message && (

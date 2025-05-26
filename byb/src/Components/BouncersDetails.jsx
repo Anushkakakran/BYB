@@ -1,4 +1,3 @@
-import React from 'react';
 import { useLocation, Link } from 'react-router-dom';
 
 const BouncerDetails = () => {
@@ -35,16 +34,16 @@ const BouncerDetails = () => {
         />
 
         <div className="p-6">
-          <h1 className="text-3xl font-extrabold text-black mb-2">{bouncer.Name}</h1>
-          <p className="text-gray font-semibold mb-4">{bouncer.Rating} ★ Bouncer</p>
+          <h2 className="text-3xl font-bold text-black">{bouncer.Salutation} {bouncer.FirstName} {bouncer.LastName}</h2>
+          {/* <p className="text-gray font-semibold mb-4">{bouncer.Rating} ★ Bouncer</p> */}
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 text-gray">
+          <div className="grid grid-cols-1 sm:grid-cols-2 mt-6 gap-x-8 gap-y-4 text-gray">
             <Detail label="Age" value={bouncer.Age__c} />
             <Detail label="Phone" value={bouncer.Phone} />
-            <Detail label="Height" value={bouncer.Height__c} />
-            <Detail label="Weight" value={`${bouncer.Weight} kg`} />
-            <Detail label="Chest" value={bouncer.Chest__c} />
-            <Detail label="Biceps" value={bouncer.Biceps__c} />
+            <Detail label="Height" value={bouncer.Height_in_Centimeters__c} />
+            <Detail label="Weight" value={`${bouncer.Weight_in_Kilograms__c} kg`} />
+            <Detail label="Chest" value={bouncer.Chest_in_Inches__c} />
+            <Detail label="Biceps" value={bouncer.Biceps_in_Inches__c} />
             <Detail
               label="Date of Registration"
               value={new Date(bouncer.Date_of_Registration__c).toLocaleDateString()}

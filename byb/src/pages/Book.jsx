@@ -36,7 +36,7 @@ const Book = () => {
               />
 
               <div className="p-5">
-                <h2 className="text-xl font-bold text-black">{bouncer.Name}</h2>
+                <h2 className="text-xl font-bold text-black">{bouncer.Salutation} {bouncer.FirstName} {bouncer.LastName}</h2>
                 <p className="text-gray mt-1">Age: {bouncer.Age__c}</p>
                 <p className="text-gray">Phone: {bouncer.Phone}</p>
 

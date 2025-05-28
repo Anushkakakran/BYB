@@ -48,7 +48,7 @@ const BouncerDetails = () => {
               label="Date of Registration"
               value={new Date(bouncer.Date_of_Registration__c).toLocaleDateString()}
             />
-            <Detail label="Active" value={bouncer.Active__c ? 'Yes' : 'No'} />
+            <Detail label="Active" value={bouncer.Active__c ?  'No': 'Yes'} />
           </div>
 
           <AddressSection

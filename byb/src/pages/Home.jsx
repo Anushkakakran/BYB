@@ -14,7 +14,6 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 function Home() {
 const heroImages = [hero1, hero2, hero3, hero4, hero5];
-
   return (
     <div className="min-h-screen text-black">
       {/* Hero Section */}
@@ -53,7 +52,6 @@ const heroImages = [hero1, hero2, hero3, hero4, hero5];
         ))}
       </Carousel>
       </section>
-
       {/* Services Section */}
       <section className="py-16 px-4 max-w-6xl mx-auto mb-16">
         <h2 className="text-3xl font-semibold text-center mb-12">Our Services</h2>

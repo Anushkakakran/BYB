@@ -2,6 +2,9 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
+// ✅ API base URL from environment variable
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 function Register() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -9,15 +12,18 @@ function Register() {
   const [message, setMessage] = useState("");
 
   const handleRegister = async (e) => {
-    e.preventDefault(); // ✅ Prevent default form submission
+    e.preventDefault();
 
     try {
       const response = await axios.post(
-        "http://localhost:5858/api/auth/register",
+        `${API_BASE_URL}/api/auth/register`,
         {
           username,
           email,
           password,
+        },
+        {
+          withCredentials: true, // Optional: if you're setting cookies
         }
       );
       setMessage(response.data.message || "Registration successful");
@@ -89,7 +95,7 @@ function Register() {
         <button
           type="button"
           onClick={() =>
-            window.open("http://localhost:5858/api/auth/google", "_self")
+            window.open(`${API_BASE_URL}/api/auth/google`, "_self")
           }
           className="w-full mt-3 bg-red-600 hover:bg-red-700 text-black font-semibold py-3 rounded-md transition duration-300"
         >
@@ -108,7 +114,7 @@ function Register() {
         <p
           className={`mt-4 text-sm font-medium ${
             message.toLowerCase().includes("success")
-              ? "text-white"
+              ? "text-green-600"
               : "text-red-600"
           }`}
         >

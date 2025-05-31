@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { fetchAllBouncers, fetchFilteredBouncers } from '../../api/bouncerApi';
 import { hasActiveFilter } from '../../utils/filterUtils';
 import FilterSidebar from './filterSidebar';
-import BouncerCard from './bouncerCard';
+import BouncerCard from './bouncercard';
 
 const Book = () => {
   const [bouncers, setBouncers] = useState([]);

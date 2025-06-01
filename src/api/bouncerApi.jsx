@@ -1,7 +1,10 @@
 import axios from 'axios';
 
-// ✅ Use environment variable for base URL
-const BASE_URL = `${import.meta.env.VITE_API_BASE_URL}/api`;
+// ✅ Safe fallback and debug log
+const rawBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5858';
+const BASE_URL = rawBaseUrl.replace(/\/+$/, '') + '/api';
+
+console.log("🌐 Bouncer API Base URL:", BASE_URL);
 
 export const fetchAllBouncers = () => axios.get(`${BASE_URL}/accounts`);
 

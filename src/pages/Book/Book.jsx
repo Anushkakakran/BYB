@@ -8,7 +8,7 @@ const Book = () => {
   const [bouncers, setBouncers] = useState([]);
   const [allBouncers, setAllBouncers] = useState([]);
 
-  const [IsChecked, setIsChecked] = useState({
+  const [isChecked, setIsChecked] = useState({
     height_173_178: false,
     height_179_182: false,
     height_above_183: false,
@@ -23,27 +23,41 @@ const Book = () => {
     heavy: false,
   });
 
+  // 🔁 Fetch All Bouncers on Load
   useEffect(() => {
     fetchAllBouncers()
       .then((res) => {
-        setBouncers(res.data);
-        setAllBouncers(res.data);
+        console.log("✅ fetchAllBouncers →", res.data);
+        const safeData = Array.isArray(res.data) ? res.data : [];
+        setBouncers(safeData);
+        setAllBouncers(safeData);
       })
-      .catch((err) => console.error('API error:', err));
+      .catch((err) => {
+        console.error('❌ Error fetching all bouncers:', err);
+      });
   }, []);
 
+  // 🔍 Apply Filters Whenever Checkboxes Change
   useEffect(() => {
-    if (!hasActiveFilter(IsChecked)) {
+    if (!hasActiveFilter(isChecked)) {
+      console.log("🧹 No filters active → restoring all bouncers");
       setBouncers(allBouncers);
       return;
     }
 
-    fetchFilteredBouncers(IsChecked)
-      .then((res) => setBouncers(res.data))
-      .catch((err) => console.error('Filter error:', err));
-  }, [IsChecked, allBouncers]);
+    fetchFilteredBouncers(isChecked)
+      .then((res) => {
+        console.log("🎯 fetchFilteredBouncers →", res.data);
+        const safeData = Array.isArray(res.data) ? res.data : [];
+        setBouncers(safeData);
+      })
+      .catch((err) => {
+        console.error('❌ Error applying filters:', err);
+      });
+  }, [isChecked, allBouncers]);
 
-  const onchecked = (event) => {
+  // ✅ Checkbox Toggle Handler
+  const handleCheckboxChange = (event) => {
     const { name, checked } = event.target;
     setIsChecked((prev) => ({
       ...prev,
@@ -53,15 +67,20 @@ const Book = () => {
 
   return (
     <div className="flex min-h-screen bg-gray-50">
-      <FilterSidebar IsChecked={IsChecked} onchecked={onchecked} />
+      <FilterSidebar IsChecked={isChecked} onchecked={handleCheckboxChange} />
       <main className="flex-1 p-6">
-        <h1 className="text-4xl font-extrabold text-center mb-12 text-black">Book a Bouncer</h1>
-        {bouncers.length === 0 ? (
-          <p className="text-center text-gray-600 text-lg">No bouncers available at the moment.</p>
+        <h1 className="text-4xl font-extrabold text-center mb-12 text-black">
+          Book a Bouncer
+        </h1>
+
+        {!Array.isArray(bouncers) || bouncers.length === 0 ? (
+          <p className="text-center text-gray-600 text-lg">
+            No bouncers available at the moment.
+          </p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {bouncers.map((bouncer) => (
-              <BouncerCard key={bouncer._id} bouncer={bouncer} />
+            {bouncers.map((bouncer, index) => (
+              <BouncerCard key={bouncer._id || index} bouncer={bouncer} />
             ))}
           </div>
         )}

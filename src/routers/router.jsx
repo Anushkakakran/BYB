@@ -1,12 +1,13 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "../App";
-import Home from "../pages/Home";
+import Home from "../pages/Home/Home";
 import About from "../pages/AboutUs";
 import Book from "../pages/Book/Book";
 import Register from "../pages/AuthPages/Register";
 import Login from "../pages/AuthPages/Login";
 import ContactForm from "../pages/ContactUs";
-import BouncerDetails from "../pages/BouncerDetails/BouncerDetails";
+import BouncerDetails from "../pages/Book/BouncerDetails";
+
 
 
 const router = createBrowserRouter([

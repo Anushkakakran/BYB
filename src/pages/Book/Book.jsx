@@ -66,9 +66,9 @@ const Book = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div className="flex  min-h-screen bg-gray-50">
       <FilterSidebar IsChecked={isChecked} onchecked={handleCheckboxChange} />
-      <main className="flex-1 p-6">
+      <main className="flex-1 mt-14 p-6 ">
         <h1 className="text-4xl font-extrabold text-center mb-12 text-black">
           Book a Bouncer
         </h1>

@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import OauthSuccess from "../Components/oauthSuccess";
 import App from "../App";
 import Home from "../pages/Home";
 import About from "../pages/AboutUs";
@@ -37,6 +38,11 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login/>
+      },
+     
+      {
+        path: "/oauth-success",
+        element: <OauthSuccess/>
       },
       {
         path: "/contact",

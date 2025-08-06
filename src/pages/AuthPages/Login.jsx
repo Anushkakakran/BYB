@@ -3,23 +3,22 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FcGoogle } from "react-icons/fc";
 
-// ✅ Safe API URL builder to avoid double slashes
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL?.replace(/\/$/, "");
-const safeApiUrl = (path) => `${API_BASE_URL}${path}`;
-
 function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
-  // ✅ Handle email/password login
+  // Use relative path to leverage Vite proxy during development
+  const API_LOGIN_PATH = "/api/auth/login";
+  const API_GOOGLE_PATH = "/api/auth/google";
+
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
       const response = await axios.post(
-        safeApiUrl("/api/auth/login"),
+        API_LOGIN_PATH,
         { email, password },
         { withCredentials: true }
       );
@@ -41,9 +40,9 @@ function Login() {
     }
   };
 
-  // ✅ Redirect to Google login
+  // This will start Google OAuth flow by opening backend OAuth endpoint
   const handleGoogleLogin = () => {
-    window.open(safeApiUrl("/api/auth/google"), "_self");
+    window.open(API_GOOGLE_PATH, "_self");
   };
 
   return (

@@ -2,9 +2,6 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-// ✅ API base URL from environment variable
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
 function Register() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -15,16 +12,11 @@ function Register() {
     e.preventDefault();
 
     try {
+      // Use relative path for API call to leverage Vite proxy
       const response = await axios.post(
-        `${API_BASE_URL}/api/auth/register`,
-        {
-          username,
-          email,
-          password,
-        },
-        {
-          withCredentials: true, // Optional: if you're setting cookies
-        }
+        "/api/auth/register",
+        { username, email, password },
+        { withCredentials: true }
       );
       setMessage(response.data.message || "Registration successful");
     } catch (error) {
@@ -94,9 +86,7 @@ function Register() {
 
         <button
           type="button"
-          onClick={() =>
-            window.open(`${API_BASE_URL}/api/auth/google`, "_self")
-          }
+          onClick={() => window.open("/api/auth/google", "_self")}
           className="w-full mt-3 bg-red-600 hover:bg-red-700 text-black font-semibold py-3 rounded-md transition duration-300"
         >
           Sign up with Google

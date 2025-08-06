@@ -1,4 +1,4 @@
-import ChooseUs from './Home/ChooseUs';
+import ChooseUs from '../Components/ChooseUs';
 import Button from "../Components/Button";
 
 const AboutUs = () => {

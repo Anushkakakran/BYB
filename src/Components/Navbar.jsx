@@ -78,9 +78,9 @@ function Navbar() {
       >
         <div className="px-5 py-4 flex items-center justify-between border-b border-lightGray">
           <img src={Logoimg} alt="Logo" className="w-10 h-10 rounded-full" />
-          {/* <button onClick={() => setMenuOpen(false)} className="text-2xl">
+          <button onClick={() => setMenuOpen(false)} className="text-2xl">
             <HiX />
-          </button> */}
+          </button>
         </div>
         <ul className="flex flex-col mt-4 space-y-4 px-6 text-base font-medium">
           <li>

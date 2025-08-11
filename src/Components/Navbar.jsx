@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
 import Logoimg from "../assets/LOGO.jpg";
 import { Link } from "react-router-dom";
+import Profile from "../pages/Profile";
+import Grid from "../pages/Grid";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -23,33 +25,20 @@ function Navbar() {
         </Link>
 
         {/* Desktop Menu */}
-        <ul className="hidden md:flex items-center space-x-6 lg:space-x-8 text-sm lg:text-base font-medium">
-          <li>
+        <div className="hidden md:flex items-center justify-between w-full text-sm lg:text-base font-medium">
+          <div className="flex-1 flex justify-center space-x-6 lg:space-x-8">
             <Link to="/" className="hover:text-lightGray">
               Home
             </Link>
-          </li>
-          <li>
             <Link to="/book-bouncer" className="hover:text-lightGray">
               Book
             </Link>
-          </li>
-          <li>
             <Link to="/about-us" className="hover:text-lightGray">
               About Us
             </Link>
-          </li>
-          <li>
             <Link to="/contact" className="hover:text-lightGray">
               Contact Us
             </Link>
-          </li>
-          <li>
-            <Link to="/login" className="hover:text-lightGray">
-              Login
-            </Link>
-          </li>
-          <li>
             <a
               href="https://orgfarm-bbb820bd93-dev-ed.develop.my.site.com"
               onClick={handleLinkClick}
@@ -59,14 +48,20 @@ function Navbar() {
             >
               Register As A Bouncer
             </a>
-          </li>
-        </ul>
+          </div>
+          <div className="flex items-center space-x-4">
+            <Grid />
+            <Profile />
+          </div>
+        </div>
 
         {/* Mobile Menu Toggle */}
-        <div className="md:hidden text-2xl">
-          <button onClick={() => setMenuOpen(!menuOpen)}>
-            {menuOpen ? <HiX /> : <HiMenu />}
-          </button>
+        <div className="flex items-center space-x-4">
+          <div className="md:hidden text-2xl">
+            <button onClick={() => setMenuOpen(!menuOpen)}>
+              {menuOpen ? <HiX /> : <HiMenu />}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -120,15 +115,6 @@ function Navbar() {
             </Link>
           </li>
           <li>
-            <Link
-              to="/login"
-              onClick={handleLinkClick}
-              className="hover:text-lightGray"
-            >
-              Login
-            </Link>
-          </li>
-          <li>
             <a
               href="https://orgfarm-bbb820bd93-dev-ed.develop.my.site.com"
               onClick={handleLinkClick}
@@ -138,6 +124,20 @@ function Navbar() {
             >
               Register As A Bouncer
             </a>
+          </li>
+
+          <li className="border-t border-lightGray !mt-8"></li>
+
+          {/* Grid */}
+          <li className="hover:text-lightGray">
+           <Grid onLinkClick={handleLinkClick} />
+          </li>
+
+          {/* Profile */}
+          <li className="hover:text-lightGray">
+            
+           <Profile onLinkClick={handleLinkClick} />
+
           </li>
         </ul>
       </div>

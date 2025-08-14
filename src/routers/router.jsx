@@ -9,13 +9,15 @@ import Login from "../pages/AuthPages/Login";
 import ContactForm from "../pages/ContactUs";
 import BouncerDetails from "../pages/BouncerDetails/BouncerDetails";
 import PrivateRoute from "../utils/Protected";
+import ProfilePage from "../pages/Profile";
+
 
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    children: [
+    children:[
       { path: "/", element: <Home /> },
       { path: "/book-bouncer", element: <Book /> },
       {
@@ -29,6 +31,7 @@ const router = createBrowserRouter([
       { path: "/login", element: <Login /> },
       { path: "/oauth-success", element: <OauthSuccess /> },
       { path: "/contact", element: <ContactForm /> },
+      { path: "/profile", element: <ProfilePage/> },
     ],
   },
 ]);

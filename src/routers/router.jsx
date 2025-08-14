@@ -8,6 +8,8 @@ import Register from "../pages/AuthPages/Register";
 import Login from "../pages/AuthPages/Login";
 import ContactForm from "../pages/ContactUs";
 import BouncerDetails from "../pages/BouncerDetails/BouncerDetails";
+import ProfilePage from "../pages/Profile";
+
 
 
 const router = createBrowserRouter([
@@ -47,6 +49,10 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <ContactForm/>
+      },
+      {
+        path: "/profile",
+        element: <ProfilePage/>
       },
     ]
   }

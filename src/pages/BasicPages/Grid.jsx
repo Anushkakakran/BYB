@@ -44,7 +44,7 @@ const Grid = ({ onLinkClick }) => {
             onClick={handleDropdownLinkClick}
             className="block px-4 py-2 hover:text-lightGray"
           >
-            Cart
+            Booking History
           </Link>
         </div>
       )}

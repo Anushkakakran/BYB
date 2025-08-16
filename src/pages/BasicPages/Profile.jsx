@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 
 const Profile = ({ onLinkClick }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const dropdownRef = useRef(null);
-
+ let token = localStorage.getItem("token");
+ let username = localStorage.getItem("username");
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -23,7 +23,8 @@ const Profile = ({ onLinkClick }) => {
   };
 
   const handleAuthAction = () => {
-    setIsLoggedIn((prev) => !prev);
+        localStorage.removeItem("token");
+         localStorage.removeItem("username");
     handleDropdownLinkClick();
   };
 
@@ -38,13 +39,15 @@ const Profile = ({ onLinkClick }) => {
 
       {isOpen && (
         <div className="absolute right-0 mt-4 w-44 md:w-32 bg-white rounded-lg shadow-lg z-50">
-          {isLoggedIn ? (
+          <h1 className="w-full text-left px-4 py-2 ">{username}</h1>
+          {token?(
+           (   
             <button
               onClick={handleAuthAction}
               className="w-full text-left px-4 py-2 hover:text-lightGray"
             >
               Sign Out
-            </button>
+            </button>)
           ) : (
             <Link
               to="/login"

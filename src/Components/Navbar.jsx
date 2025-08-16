@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
 import Logoimg from "../assets/LOGO.jpg";
 import { Link } from "react-router-dom";
-import Profile from "../pages/Profile";
-import Grid from "../pages/Grid";
+import Profile from "../pages/BasicPages/Profile";
+import Grid from "../pages/BasicPages/Grid";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);

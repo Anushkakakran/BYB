@@ -19,6 +19,12 @@ const BouncerCard = ({ bouncer }) => (
         <Link to={`/book-bouncer/${bouncer._id}`} state={bouncer}>
           <Button text="View Details" />
         </Link>
+        <Link to="">
+          <Button text="Buy Now" />
+        </Link>
+        <Link to="">
+          <Button text="Add To Booking" />
+        </Link>
       </div>
     </div>
   </div>

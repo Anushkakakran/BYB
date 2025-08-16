@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "../../Components/Button.jsx";
-import { fetchAllBouncers, fetchFilteredBouncers } from "../../api/bouncerApi.jsx";
-import FilterSidebar from "../Book/filterSidebar.jsx";
+import { fetchAllBouncers, fetchFilteredBouncers} from "../../api/bouncerApi.jsx";
+import FilterSidebar from "../Book/Filters/filterSidebar.jsx";
 import { hasActiveFilter } from "../../utils/filterUtils.jsx";
-import BouncerCard from "../Book/bouncercard.jsx";
+import BouncerCard from "../BouncerDetails/bouncercard.jsx";
 import Calender from "../Book/Calendar/calender.jsx";
 import { HiMenu } from "react-icons/hi";
+import Location from "../Book/Filters/Location.jsx";
+import SubLocation from "../Book/Filters/subLocation.jsx";
 
 const Book = () => {
   const [bouncers, setBouncers] = useState([]);
@@ -23,8 +25,26 @@ const Book = () => {
     medium: false,
     heavy: false,
   });
-
+    const [area, setarea] = useState({
+      Bangalore:false ,
+      Chennai:false,
+      Delhi_NCR:false,
+      Kolkata:false,
+      Mumbai:false,
+    });
+    const [subarea,setsubarea] = useState({
+      Delhi:false ,
+      Gurgaon: false ,
+      Noida:false,
+      Greater_Noida: false ,
+      Ghaziabad: false , 
+      Faridabad : false ,
+      Andheri:false, 
+      Bandra:false
+    })
   const [visible, setVisible] = useState(false);
+  const [see, setsee] = useState(false);
+    const [seen, setseen] = useState(false);
   const [selectedRange, setSelectedRange] = useState({ from: undefined, to: undefined });
   const [shift, setShift] = useState("");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -43,12 +63,12 @@ const Book = () => {
   }, []);
 
   useEffect(() => {
-    if (!hasActiveFilter(filters)) {
+    if (!hasActiveFilter(filters,area)) {
       setBouncers(allBouncers);
       return;
     }
 
-    fetchFilteredBouncers(filters)
+    fetchFilteredBouncers(filters,area,subarea)
       .then((res) => {
         const safeData = Array.isArray(res.data) ? res.data : [];
         setBouncers(safeData);
@@ -56,11 +76,19 @@ const Book = () => {
       .catch((err) => {
         console.error("API error:", err);
       });
-  }, [filters, allBouncers]);
+  }, [filters,area,subarea, allBouncers]);
 
-  const handleCheckboxChange = (e) => {
+  const handleFilter = (e) => {
     const { name, checked } = e.target;
-    setFilters((prev) => ({ ...prev, [name]: checked }));
+       setFilters((prev) => ({ ...prev, [name]: checked }));
+  };
+    const handleArea = (e) => {
+    const { name, checked } = e.target;
+      setarea((prev)=>({...prev,[name]:checked}));
+  };
+    const handleSubArea = (e) => {
+    const { name, checked } = e.target;
+      setsubarea((prev)=>({...prev,[name]:checked}))
   };
 
   const handleContinue = () => {
@@ -112,7 +140,7 @@ const Book = () => {
       >
         <FilterSidebar
           IsChecked={filters}
-          onchecked={handleCheckboxChange}
+          onchecked={handleFilter}
           onClose={() => setIsSidebarOpen(false)}
         />
       </div>
@@ -122,8 +150,12 @@ const Book = () => {
         <h1 className="text-4xl font-extrabold text-center mb-12 text-black">
           <div className="flex justify-center space-x-4">
             <Link>
-              <Button text="Where ?" />
+              <Button text="Location"onclick={() => setsee(!see)} />
             </Link>
+            {Object.values(area).some(Boolean)&&(<Link>
+              <Button text="Sub-Location"onclick={() => setseen(!seen)} />
+            </Link>)
+            }
             <Link>
               <Button text="Date-Time" onclick={() => setVisible(!visible)} />
             </Link>
@@ -139,7 +171,8 @@ const Book = () => {
             onContinue={handleContinue}
           />
         )}
-
+        {see&&(<Location isChecked={area} Onchecked={handleArea}/>)}
+        {seen&&(<SubLocation isChecked={area} IsChecked={subarea} Onchecked={handleSubArea}/>)}
         {!Array.isArray(bouncers) || bouncers.length === 0 ? (
           <p className="text-center text-gray text-lg">
             No bouncers available at the moment.

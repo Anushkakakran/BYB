@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
-import hero1 from "../assets/hero1.jpg";
-import hero2 from "../assets/hero2.jpg";
-import hero3 from "../assets/hero3.jpg";
-import hero4 from "../assets/hero4.jpg";
-import hero5 from "../assets/hero5.jpg";
+import hero1 from "../../assets/hero1.jpg";
+import hero2 from "../../assets/hero2.jpg";
+import hero3 from "../../assets/hero3.jpg";
+import hero4 from "../../assets/hero4.jpg";
+import hero5 from "../../assets/hero5.jpg";
 import { GiSecurityGate } from "react-icons/gi";
 import { Ri24HoursFill } from "react-icons/ri";
 import { FaShieldAlt, FaUser } from "react-icons/fa";
-import ChooseUs from "../Components/ChooseUs";
-import Button from "../Components/Button";
+import ChooseUs from "../../Components/ChooseUs";
+import Button from "../../Components/Button";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 

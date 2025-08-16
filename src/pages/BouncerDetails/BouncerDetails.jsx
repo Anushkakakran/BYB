@@ -1,4 +1,5 @@
 import { useLocation, Link } from 'react-router-dom';
+import Button from '../../Components/Button';
 
 const BouncerDetails = () => {
   const { state: bouncer } = useLocation();
@@ -60,7 +61,13 @@ const BouncerDetails = () => {
             address={bouncer.ShippingAddress}
           />
         </div>
-      </div>
+             <Link to="">
+          <Button text="Buy Now" />
+        </Link>
+        <Link to="">
+          <Button text="Add To Booking" />
+        </Link>
+      </div>    
     </div>
   );
 };
@@ -84,7 +91,7 @@ const AddressSection = ({ title, address }) => {
         {address.country}
       </address>
     </div>
-  );
+    )
 };
 
 export default BouncerDetails;

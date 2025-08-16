@@ -8,5 +8,5 @@ console.log("🌐 Bouncer API Base URL:", BASE_URL);
 
 export const fetchAllBouncers = () => axios.get(`${BASE_URL}/accounts`);
 
-export const fetchFilteredBouncers = (filters) =>
-  axios.post(`${BASE_URL}/filter/newfilter`, filters);
+export const fetchFilteredBouncers = (filters,area,subarea) =>
+  axios.post(`${BASE_URL}/filter/newfilter`, {...filters,...area,...subarea});

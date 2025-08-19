@@ -51,15 +51,15 @@ function FilterSidebar({  onchecked, onClose}) {
   return (
    <aside className="w-64 bg-white p-6 border-r border-gray-200 sticky top-0 h-full overflow-auto">
 
-    <div className="flex justify-between items-center mb-4 sm:hidden">
-      <h2 className="text-xl font-semibold">Filters</h2>
-      <button onClick={onClose} className="text-2xl">
-        <HiX />
-      </button>
-    </div>
+    <div className="flex justify-between items-center mb-4 md:hidden">
+  <h2 className="text-xl font-semibold">Filters</h2>
+  <button onClick={onClose} className="text-2xl">
+    <HiX />
+  </button>
+</div>
 
+<h2 className="text-xl font-semibold mb-4 hidden md:block">Filters</h2>
 
-    <h2 className="text-xl font-semibold mb-4 hidden sm:block">Filters</h2>
 
     {/* Height Filters */}
     <div>

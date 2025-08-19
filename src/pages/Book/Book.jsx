@@ -54,7 +54,7 @@ const Book = () => {
       {showMenuButton && (
         <button
           onClick={() => setIsSidebarOpen(true)}
-          className="sm:hidden fixed top-16 left-4 z-50 p-2"
+          className="md:hidden fixed top-16 left-4 z-50 p-2"
         >
           <HiMenu className="text-3xl text-black" />
         </button>
@@ -69,10 +69,14 @@ const Book = () => {
       )}
 
       {/* Sidebar: fixed with full viewport height */}
+      {/* Sidebar */}
       <div
-        className={`fixed top-16 left-0 h-[calc(100vh-4rem)] overflow-auto text-black z-50 transform ${
-          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } transition-transform sm:static sm:translate-x-0 sm:h-auto sm:overflow-visible`}
+        className={`${
+          isSidebarOpen
+            ? "fixed top-16 left-0 h-[calc(100vh-4rem)] w-64 bg-white border-r transform transition-transform duration-300 z-50 translate-x-0"
+            : "fixed top-16 left-0 h-[calc(100vh-4rem)] w-64 bg-white border-r transform transition-transform duration-300 z-50 -translate-x-full"
+        } 
+          md:translate-x-0 md:sticky md:top-16 md:h-[calc(100vh-4rem)] md:overflow-y-auto`}
       >
         <FilterSidebar
           onchecked={handledata}

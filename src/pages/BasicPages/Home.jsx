@@ -161,7 +161,7 @@ const heroImages = [hero1, hero2, hero3, hero4, hero5];
       </section>
 
       {/* Featured Bouncers Section */}
-      <section className="bg-white py-16 px-4 text-center mb-16">
+      <section className="bg-whit py-16 px-4 text-center mb-16">
         <h2 className="text-3xl font-semibold text-darkBlue mb-12">Featured Bouncers</h2>
         <div className="max-w-6xl mx-auto grid gap-12 sm:grid-cols-2 md:grid-cols-3">
           {[

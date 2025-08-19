@@ -33,7 +33,7 @@ const Grid = ({ onLinkClick }) => {
       {isOpen && (
         <div className="absolute right-0 mt-2 w-44 text-black bg-white rounded-lg shadow-lg z-50">
           <Link
-            to="/book-bouncer"
+            to="/My_Booking"
             onClick={handleDropdownLinkClick}
             className="block px-4 py-2 hover:text-lightGray"
           >

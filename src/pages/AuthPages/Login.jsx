@@ -12,10 +12,21 @@ function Login() {
   // Use relative path to leverage Vite proxy during development
   const API_LOGIN_PATH = "/api/auth/login";
   const API_GOOGLE_PATH = "/api/auth/google";
+  const validformdata = ()=>{
+    if(!email|| !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+      alert("invalid email format");
+      return false
+    }
+    if(!password || password.length<6){
+      alert("invalid password length / password should be at least of  6 character");
+      return false
+    }
+    return true
+  }
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
+     if(!validformdata()) return;
     try {
       const response = await axios.post(
         API_LOGIN_PATH,
@@ -34,12 +45,11 @@ function Login() {
     } catch (error) {
       const errMsg = error.response?.data?.message || "Login failed";
       setMessage(errMsg);
-
       if (error.response?.status === 404) {
         navigate("/sign-up");
       }
-    }
-  };
+  }
+};
 
   // This will start Google OAuth flow by opening backend OAuth endpoint
   const handleGoogleLogin = () => {

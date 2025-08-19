@@ -8,9 +8,21 @@ function Register() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
+    const validformdata = ()=>{
+    if(!email|| !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+      alert("invalid email");
+      return false
+    }
+    if(!password || password.length<6){
+      alert("invalid password length / password should be at least of  6 character");
+      return false
+    }
+    return true
+  }
+
   const handleRegister = async (e) => {
     e.preventDefault();
-
+ if(!validformdata()) return;
     try {
       // Use relative path for API call to leverage Vite proxy
       const response = await axios.post(
@@ -23,6 +35,7 @@ function Register() {
       const errmsg = error.response?.data.message || "Registration failed";
       setMessage(errmsg);
     }
+    
   };
 
   return (

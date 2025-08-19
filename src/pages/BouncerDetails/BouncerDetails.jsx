@@ -1,9 +1,29 @@
 import { useLocation, Link } from 'react-router-dom';
 import Button from '../../Components/Button';
+import axios from "axios";
+import { getGuestId } from '../../utils/getGuestId.jsx';
 
 const BouncerDetails = () => {
   const { state: bouncer } = useLocation();
-
+  const rawBaseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:5858";
+  const BASE_URL = rawBaseUrl.replace(/\/+$/, "") + "/api";
+       const  token = localStorage.getItem("token");
+  const AddToReservation = async (bouncerid) => {
+     const guestId = getGuestId();
+    console.log("Sending ID to backend:", bouncerid ,guestId,token ); 
+    try {
+        if(token){
+          const res = await axios.post(`${BASE_URL}/reservation/add`,{ bouncerid: bouncerid},{ headers: { Authorization: `Bearer ${token}` } });
+           alert(res.data.message || "Added to reservation successfully");
+        }else{
+             const res = await axios.post(`${BASE_URL}/reservation/add`, { bouncerid: bouncerid ,guestid: guestId,});
+      alert(res.data.message || "Added to reservation successfully");
+        }
+    } catch (err) {
+      console.error("Error adding reservation:", err);
+      alert("Failed to add to reservation");
+    }
+  };
   if (!bouncer) {
     return (
       <div className="mt-28 px-4 text-center text-gray pb-24">
@@ -64,8 +84,8 @@ const BouncerDetails = () => {
              <Link to="">
           <Button text="Buy Now" />
         </Link>
-        <Link to="">
-          <Button text="Add To Booking" />
+        <Link>
+          <Button text="Add To Booking" onclick={()=>AddToReservation(bouncer._id)} />
         </Link>
       </div>    
     </div>

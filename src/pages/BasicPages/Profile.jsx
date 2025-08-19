@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Profile = ({ onLinkClick }) => {
+  const Navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
  let token = localStorage.getItem("token");
@@ -25,7 +27,9 @@ const Profile = ({ onLinkClick }) => {
   const handleAuthAction = () => {
         localStorage.removeItem("token");
          localStorage.removeItem("username");
+                 localStorage.removeItem("userid");
     handleDropdownLinkClick();
+    Navigate("/login");
   };
 
   return (

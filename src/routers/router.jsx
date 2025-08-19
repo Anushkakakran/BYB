@@ -10,7 +10,7 @@ import ContactForm from "../pages/BasicPages/ContactUs";
 import BouncerDetails from "../pages/BouncerDetails/BouncerDetails";
 import PrivateRoute from "../utils/Protected";
 import ProfilePage from "../pages/BasicPages/Profile";
-
+import Reservation from "../Store/Reservation.jsx";
 
 
 const router = createBrowserRouter([
@@ -33,6 +33,7 @@ const router = createBrowserRouter([
       { path: "/oauth-success", element: <OauthSuccess /> },
       { path: "/contact", element: <ContactForm /> },
       { path: "/profile", element: <ProfilePage/> },
+       { path: "/Reservation", element: <Reservation/> },
     ],
   },
 ]);

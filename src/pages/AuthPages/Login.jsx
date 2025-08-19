@@ -12,34 +12,49 @@ function Login() {
   // Use relative path to leverage Vite proxy during development
   const API_LOGIN_PATH = "/api/auth/login";
   const API_GOOGLE_PATH = "/api/auth/google";
+  const rawBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5858';
+  const BASE_URL = rawBaseUrl.replace(/\/+$/, '') + '/api';
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
 
-    try {
-      const response = await axios.post(
-        API_LOGIN_PATH,
-        { email, password },
-        { withCredentials: true }
-      );
+const handleLogin = async (e) => {
+  e.preventDefault();
 
-      setMessage(response.data.message || "Login successful");
+  try {
+    const response = await axios.post(
+      API_LOGIN_PATH,
+      { email, password },
+      { withCredentials: true }
+    );
 
-      if (response.data.token) {
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("username",response.data.user.username);
-      }
+    setMessage(response.data.message || "Login successful");
 
-      navigate("/");
-    } catch (error) {
-      const errMsg = error.response?.data?.message || "Login failed";
-      setMessage(errMsg);
+    if (response.data.token) {
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("username", response.data.user.username);
+      localStorage.setItem("userid",response.data.user.id);
 
-      if (error.response?.status === 404) {
-        navigate("/sign-up");
+      const oldGuestId = localStorage.getItem("guestId");
+      if (oldGuestId) {
+        await axios.post(
+          `${BASE_URL}/reservation/merge`,
+          { guestId: oldGuestId }, 
+          { headers: { Authorization: `Bearer ${response.data.token}` } }
+        );
+        localStorage.removeItem("guestId");
       }
     }
-  };
+
+    navigate("/");
+  } catch (error) {
+    const errMsg = error.response?.data?.message || "Login failed";
+    setMessage(errMsg);
+
+    if (error.response?.status === 404) {
+      navigate("/sign-up");
+    }
+  }
+};
+
 
   // This will start Google OAuth flow by opening backend OAuth endpoint
   const handleGoogleLogin = () => {

@@ -13,7 +13,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="relative bg-black text-white w-full z-50 shadow-md">
+    <nav className="relative bg-black text-white w-full z-[100] shadow-md">
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center">
@@ -73,9 +73,6 @@ function Navbar() {
       >
         <div className="px-5 py-4 flex items-center justify-between border-b border-lightGray">
           <img src={Logoimg} alt="Logo" className="w-10 h-10 rounded-full" />
-          <button onClick={() => setMenuOpen(false)} className="text-2xl">
-            <HiX />
-          </button>
         </div>
         <ul className="flex flex-col mt-4 space-y-4 px-6 text-base font-medium">
           <li>

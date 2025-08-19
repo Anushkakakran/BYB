@@ -14,11 +14,25 @@ function Login() {
   const API_GOOGLE_PATH = "/api/auth/google";
   const rawBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5858';
   const BASE_URL = rawBaseUrl.replace(/\/+$/, '') + '/api';
+  
+  
+    const validformdata = ()=>{
+    if(!email|| !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+      alert("invalid email format");
+      return false
+    }
+    if(!password || password.length<6){
+      alert("invalid password length / password should be at least of  6 character");
+      return false
+    }
+    return true
+  }
+
 
 
 const handleLogin = async (e) => {
   e.preventDefault();
-
+  if(!validformdata()) return;
   try {
     const response = await axios.post(
       API_LOGIN_PATH,
@@ -41,9 +55,8 @@ const handleLogin = async (e) => {
           { headers: { Authorization: `Bearer ${response.data.token}` } }
         );
         localStorage.removeItem("guestId");
-      }
     }
-
+    }
     navigate("/");
   } catch (error) {
     const errMsg = error.response?.data?.message || "Login failed";
@@ -54,7 +67,6 @@ const handleLogin = async (e) => {
     }
   }
 };
-
 
   // This will start Google OAuth flow by opening backend OAuth endpoint
   const handleGoogleLogin = () => {

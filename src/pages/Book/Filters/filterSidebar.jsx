@@ -1,7 +1,55 @@
+import React ,{ useEffect, useState }  from "react";
 import { HiX } from "react-icons/hi";
+import { fetchAllBouncers, fetchFilteredBouncers} from "../../../api/bouncerApi.jsx";
+import { hasActiveFilter } from "../../../utils/filterUtils.jsx";
 
-const FilterSidebar = ({ IsChecked, onchecked, onClose }) => (
-  <aside className="w-64 bg-white p-6 border-r border-gray-200 sticky top-0 h-full overflow-auto">
+function FilterSidebar({  onchecked, onClose}) {
+    const [allBouncers, setAllBouncers] = useState([]);
+    const [filters, setFilters] = useState({
+      height_173_178: false,
+      height_179_182: false,
+      height_above_183: false,
+      age_below_25: false,
+      age_25_30: false,
+      age_30_35: false,
+      age_above_35: false,
+      lean: false,
+      medium: false,
+      heavy: false,
+    });
+      useEffect(() => {
+        fetchAllBouncers()
+          .then((res) => {
+            const safeData = Array.isArray(res.data) ? res.data : [];
+            setAllBouncers(safeData);
+             onchecked(safeData);
+          })
+          .catch((err) => {
+            console.error("API error:", err);
+          });
+      }, [onchecked]);
+        useEffect(() => {
+          if (!hasActiveFilter(filters)) {
+            onchecked(allBouncers);
+            return;
+          }
+      
+          fetchFilteredBouncers(filters)
+            .then((res) => {
+              const safeData = Array.isArray(res.data) ? res.data : [];
+              onchecked(safeData);
+            })
+            .catch((err) => {
+              console.error("API error:", err);
+            });
+        }, [filters, allBouncers,onchecked]);
+      
+        const handleFilter = (e) => {
+          const { name, checked } = e.target;
+             setFilters((prev) => ({ ...prev, [name]: checked }));
+        };
+  return (
+   <aside className="w-64 bg-white p-6 border-r border-gray-200 sticky top-0 h-full overflow-auto">
 
     <div className="flex justify-between items-center mb-4 sm:hidden">
       <h2 className="text-xl font-semibold">Filters</h2>
@@ -25,8 +73,8 @@ const FilterSidebar = ({ IsChecked, onchecked, onClose }) => (
           <input
             type="checkbox"
             name={key}
-            checked={IsChecked[key]}
-            onChange={onchecked}
+            checked={filters[key]}
+            onChange={handleFilter}
             className="mr-2"
           />
           {label}
@@ -46,8 +94,8 @@ const FilterSidebar = ({ IsChecked, onchecked, onClose }) => (
           <input
             type="checkbox"
             name={key}
-            checked={IsChecked[key]}
-            onChange={onchecked}
+            checked={filters[key]}
+            onChange={handleFilter}
             className="mr-2"
           />
           {label}
@@ -68,8 +116,8 @@ const FilterSidebar = ({ IsChecked, onchecked, onClose }) => (
           <input
             type="checkbox"
             name={key}
-            checked={IsChecked[key]}
-            onChange={onchecked}
+            checked={filters[key]}
+            onChange={handleFilter}
             className="mr-2"
           />
           {label}
@@ -77,6 +125,7 @@ const FilterSidebar = ({ IsChecked, onchecked, onClose }) => (
       ))}
     </div>
   </aside>
-);
+  )
+}
 
 export default FilterSidebar;

@@ -11,6 +11,7 @@ import BouncerDetails from "../pages/BouncerDetails/BouncerDetails";
 import PrivateRoute from "../utils/Protected";
 import ProfilePage from "../pages/BasicPages/Profile";
 import Reservation from "../Store/Reservation.jsx";
+import ForgetPassword from "../pages/AuthPages/ForgetPassword.jsx";
 
 
 const router = createBrowserRouter([
@@ -34,6 +35,7 @@ const router = createBrowserRouter([
       { path: "/contact", element: <ContactForm /> },
       { path: "/profile", element: <ProfilePage/> },
        { path: "/Reservation", element: <Reservation/> },
+       { path: "/forget-password", element: <ForgetPassword/> }
     ],
   },
 ]);

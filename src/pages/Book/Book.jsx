@@ -1,34 +1,27 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import Button from "../../Components/Button.jsx";
+import React, { useCallback, useState, useEffect } from "react";
+import { HiMenu } from "react-icons/hi";
 import FilterSidebar from "../Book/Filters/filterSidebar.jsx";
 import BouncerCard from "../BouncerDetails/bouncercard.jsx";
 import Calender from "../Book/Calendar/calender.jsx";
-import { HiMenu } from "react-icons/hi";
-import Location from "../Book/Filters/Location.jsx";
-import SubLocation from "../Book/Filters/subLocation.jsx";
+import Location from "../Book/Filters/Location.jsx"; 
+import SubLocation from "../Book/Filters/SubLocation.jsx";
 
 const Book = () => {
-    const  [Filterbouncer,setFilterbouncer] = useState([]);
-     const  [area,setarea] = useState([]);
-  const [visible, setVisible] = useState(false);
-  const [see, setsee] = useState(false);
-    const [seen, setseen] = useState(false);
+  const [Filterbouncer, setFilterbouncer] = useState([]);
+  const [selectedLocation, setSelectedLocation] = useState(null);
   const [selectedRange, setSelectedRange] = useState({ from: undefined, to: undefined });
   const [shift, setShift] = useState("");
+  const [visible, setVisible] = useState(false); 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [showMenuButton, setShowMenuButton] = useState(true);
- 
-  const handledata = useCallback((bouncer) => {
+
+  const handleBouncerData = useCallback((bouncer) => {
     setFilterbouncer(bouncer);
-  }, []);
-  
-   const handleSubAreaButton = useCallback((bouncer) => {
-    setarea(bouncer);
   }, []);
 
   const handleContinue = () => {
     const payload = {
+      location: selectedLocation,
       dateRange: selectedRange,
       shift: shift,
     };
@@ -36,21 +29,16 @@ const Book = () => {
     alert("Booking selection submitted!");
   };
 
+  // Show/hide menu button based on scroll
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY < 100) {
-        setShowMenuButton(true);
-      } else {
-        setShowMenuButton(false);
-      }
-    };
-
+    const handleScroll = () => setShowMenuButton(window.scrollY < 100);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <div className="flex bg-gray-50 h-screen">
+      {/* Mobile menu button */}
       {showMenuButton && (
         <button
           onClick={() => setIsSidebarOpen(true)}
@@ -60,7 +48,7 @@ const Book = () => {
         </button>
       )}
 
-      {/* Dark Overlay for Mobile */}
+      {/* Overlay for mobile */}
       {isSidebarOpen && (
         <div
           onClick={() => setIsSidebarOpen(false)}
@@ -68,7 +56,6 @@ const Book = () => {
         />
       )}
 
-      {/* Sidebar: fixed with full viewport height */}
       {/* Sidebar */}
       <div
         className={`${
@@ -78,42 +65,62 @@ const Book = () => {
         } 
           md:translate-x-0 md:sticky md:top-16 md:h-[calc(100vh-4rem)] md:overflow-y-auto`}
       >
-        <FilterSidebar
-          onchecked={handledata}
-          onClose={() => setIsSidebarOpen(false)}
-        />
+        <FilterSidebar onchecked={handleBouncerData} onClose={() => setIsSidebarOpen(false)} />
       </div>
 
-      {/* Main Booking Section: scrollable */}
+      {/* Main Content */}
       <main className="flex-1 px-4 sm:px-8 md:px-16 lg:px-24 pb-24 mt-10 overflow-y-auto h-[calc(100vh-2.5rem)]">
-        <h1 className="text-4xl font-extrabold text-center mb-12 text-black">
-          <div className="flex justify-center space-x-4">
-            <Link>
-              <Button text="Location" onclick={() => setsee(!see)} />
-            </Link>
-            {Object.values(area).some(Boolean)&&(<Link>
-              <Button text="Sub-Location" onclick={() => setseen(!seen)} />
-            </Link>)
-            }
-            <Link>
-              <Button text="Date-Time" onclick={() => setVisible(!visible)} />
-            </Link>
-          </div>
+        <h1 className="text-4xl font-bold text-center mb-12 text-black">
+          Booking
         </h1>
 
-        {visible && (
-          <Calender
-            shift={shift}
-            range={selectedRange}
-            onDateChange={setSelectedRange}
-            onShiftChange={setShift}
-            onContinue={handleContinue}
-          />
-        )}
-        {see&&(<Location AREA={handleSubAreaButton} onchecked={handledata}/>)}
-        {seen&&(<SubLocation isChecked={area}  onchecked={handledata}/>)}
+        {/* Filters Row */}
+        <div className="flex justify-center space-x-4 relative flex-wrap mb-12">
+          {/* Location Input */}
+          <div className="relative w-64">
+            <Location
+              onLocationSelect={(loc) => {
+                setSelectedLocation(loc);
+                handleBouncerData([]); // reset bouncer list for now
+              }}
+            />
+          </div>
+
+          {/* Sub-Location Input (only shows after city selected) */}
+          {selectedLocation && (
+            <div className="relative w-64">
+              <SubLocation
+                isChecked={{ [selectedLocation]: true }}
+                onchecked={handleBouncerData}
+              />
+            </div>
+          )}
+
+          {/* Date-Time */}
+          <div className="relative w-64">
+            <div
+              onClick={() => setVisible((prev) => !prev)}
+              className="flex items-center border rounded-lg px-3 py-2 bg-white shadow-sm cursor-pointer"
+            >
+              <span className="text-gray-600">Select Date & Time</span>
+            </div>
+            {visible && (
+              <div className="absolute top-full left-0 mt-2 w-full sm:w-auto max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl bg-white shadow-xl rounded-2xl z-50 p-4 max-h-[80vh] overflow-y-auto">
+                <Calender
+                  shift={shift}
+                  range={selectedRange}
+                  onDateChange={setSelectedRange}
+                  onShiftChange={setShift}
+                  onContinue={handleContinue}
+                />
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Bouncer Cards */}
         {!Array.isArray(Filterbouncer) || Filterbouncer.length === 0 ? (
-          <p className="text-center text-gray text-lg">
+          <p className="text-center text-gray-500 text-lg">
             No bouncers available at the moment.
           </p>
         ) : (

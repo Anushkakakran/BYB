@@ -1,74 +1,81 @@
-import { useState ,useEffect} from "react";
-import React from  'react';
-import { fetchAllBouncers, fetchFilteredBouncers} from "../../../api/bouncerApi.jsx";
-import { hasActiveFilter } from "../../../utils/filterUtils.jsx";
+import React, { useState, useEffect, useRef } from "react";
+import { FaMapMarkerAlt } from "react-icons/fa";
 
-function Location({onchecked={},AREA={}}) {
-      const [allBouncers, setAllBouncers] = useState([]);
-      const [area, setarea] = useState({
-        Bangalore:false ,
-        Chennai:false,
-        Delhi_NCR:false,
-        Kolkata:false,
-        Mumbai:false,
-      });
-          const handleArea = (e) => {
-    const { name, checked } = e.target;
-      setarea((prev)=>({...prev,[name]:checked}));
+function Location({ onLocationSelect }) {
+  const [search, setSearch] = useState("");
+  const [showDropdown, setShowDropdown] = useState(false);
+ const locations = [
+    "New Delhi, India",
+    "Mumbai, India",
+    "Bengaluru, India",
+    "Kolkata, India",
+    "Chennai, India",
+    "Jaipur, India",
+    "Goa, India",
+    "Hyderabad, India",
+  ];
+
+  const dropdownRef = useRef(null);
+
+  // ✅ Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const filteredLocations = locations.filter((loc) =>
+    loc.toLowerCase().includes(search.toLowerCase())
+  );
+
+  const handleSelect = (loc) => {
+    setSearch(loc);
+    setShowDropdown(false);
+    onLocationSelect(loc);
   };
-      useEffect(() => {
-          fetchAllBouncers()
-            .then((res) => {
-              const safeData = Array.isArray(res.data) ? res.data : [];
-              setAllBouncers(safeData);
-               onchecked(safeData);
-            })
-            .catch((err) => {
-              console.error("API error:", err);
-            });
-        }, [onchecked]);
-         useEffect(() => {
-                  if (!hasActiveFilter(area)) {
-                    onchecked(allBouncers);
-                    AREA(area)
-                    return;
-                  }
-              
-                  fetchFilteredBouncers(area)
-                    .then((res) => {
-                      const safeData = Array.isArray(res.data) ? res.data : [];
-                      onchecked(safeData);
-                      AREA(area)
-                    })
-                    .catch((err) => {
-                      console.error("API error:", err);
-                    });
-                }, [area, allBouncers,onchecked,AREA]);
+
   return (
-  <>
-      <div>
-      <h3 className="text-lg font-medium mb-3">Select Area</h3>
-      {[
-        { label: "Bangalore", key:"Bangalore" },
-        { label: "Chennai", key: "Chennai" },
-        { label: "Delhi_NCR", key: "Delhi_NCR" },
-        { label: "Kolkata", key: "Kolkata" },
-        { label: "Mumbai", key: "Mumbai" },
-      ].map(({ label, key }) => (
-        <label key={key} className="flex items-center mb-2">
-          <input
-            type="checkbox"
-            name={key}
-            checked={area[key]}
-            onChange={handleArea}
-            className="mr-2"
-          />
-          {label}
-        </label>
-      ))}
+    <div className="relative w-full max-w-sm mx-auto" ref={dropdownRef}>
+      <div className="flex items-center border rounded-lg px-3 py-2 bg-white shadow-sm">
+        <FaMapMarkerAlt className="text-gray-500 mr-2" />
+        <input
+          type="text"
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            setShowDropdown(true);
+          }}
+          onClick={() => setShowDropdown(true)} // ✅ open dropdown on click
+          placeholder="Search location"
+          className="w-full outline-none text-gray-700 placeholder-gray-400"
+        />
+      </div>
+
+      {showDropdown && (
+        <ul className="absolute top-full mt-1 w-full bg-white border rounded-lg shadow-lg max-h-60 overflow-y-auto z-50">
+          {filteredLocations.length > 0 ? (
+            filteredLocations.map((loc, idx) => (
+              <li
+                key={idx}
+                onClick={() => handleSelect(loc)}
+                className="px-4 py-2 cursor-pointer hover:bg-gray-100 text-gray-700"
+              >
+                {loc}
+              </li>
+            ))
+          ) : (
+            <li className="px-4 py-2 text-gray-500">No results found</li>
+          )}
+        </ul>
+      )}
     </div>
-  </>
-  )
+  );
 }
 
 export default Location;

@@ -12,61 +12,61 @@ function Login() {
   // Use relative path to leverage Vite proxy during development
   const API_LOGIN_PATH = "/api/auth/login";
   const API_GOOGLE_PATH = "/api/auth/google";
-  const rawBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5858';
-  const BASE_URL = rawBaseUrl.replace(/\/+$/, '') + '/api';
-  
-  
-    const validformdata = ()=>{
-    if(!email|| !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+  const rawBaseUrl =
+    import.meta.env.VITE_API_BASE_URL || "http://localhost:5858";
+  const BASE_URL = rawBaseUrl.replace(/\/+$/, "") + "/api";
+
+  const validformdata = () => {
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       alert("invalid email format");
-      return false
+      return false;
     }
-    if(!password || password.length<6){
-      alert("invalid password length / password should be at least of  6 character");
-      return false
+    if (!password || password.length < 6) {
+      alert(
+        "invalid password length / password should be at least of  6 character"
+      );
+      return false;
     }
-    return true
-  }
+    return true;
+  };
 
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    if (!validformdata()) return;
+    try {
+      const response = await axios.post(
+        API_LOGIN_PATH,
+        { email, password },
+        { withCredentials: true }
+      );
 
+      setMessage(response.data.message || "Login successful");
 
-const handleLogin = async (e) => {
-  e.preventDefault();
-  if(!validformdata()) return;
-  try {
-    const response = await axios.post(
-      API_LOGIN_PATH,
-      { email, password },
-      { withCredentials: true }
-    );
+      if (response.data.token) {
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("username", response.data.user.username);
+        localStorage.setItem("userid", response.data.user.id);
 
-    setMessage(response.data.message || "Login successful");
+        const oldGuestId = localStorage.getItem("guestId");
+        if (oldGuestId) {
+          await axios.post(
+            `${BASE_URL}/reservation/merge`,
+            { guestId: oldGuestId },
+            { headers: { Authorization: `Bearer ${response.data.token}` } }
+          );
+          localStorage.removeItem("guestId");
+        }
+      }
+      navigate("/");
+    } catch (error) {
+      const errMsg = error.response?.data?.message || "Login failed";
+      setMessage(errMsg);
 
-    if (response.data.token) {
-      localStorage.setItem("token", response.data.token);
-      localStorage.setItem("username", response.data.user.username);
-      localStorage.setItem("userid",response.data.user.id);
-
-      const oldGuestId = localStorage.getItem("guestId");
-      if (oldGuestId) {
-        await axios.post(
-          `${BASE_URL}/reservation/merge`,
-          { guestId: oldGuestId }, 
-          { headers: { Authorization: `Bearer ${response.data.token}` } }
-        );
-        localStorage.removeItem("guestId");
+      if (error.response?.status === 404) {
+        navigate("/sign-up");
+      }
     }
-    }
-    navigate("/");
-  } catch (error) {
-    const errMsg = error.response?.data?.message || "Login failed";
-    setMessage(errMsg);
-
-    if (error.response?.status === 404) {
-      navigate("/sign-up");
-    }
-  }
-};
+  };
 
   // This will start Google OAuth flow by opening backend OAuth endpoint
   const handleGoogleLogin = () => {
@@ -107,6 +107,15 @@ const handleLogin = async (e) => {
             required
             placeholder="Password"
           />
+        </div>
+
+        <div className="text-right mb-4">
+          <Link
+            to="/forget-password"
+            className="text-red text-sm hover:underline"
+          >
+            Forgot Password?
+          </Link>
         </div>
 
         <button

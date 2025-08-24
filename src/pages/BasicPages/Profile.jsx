@@ -56,7 +56,7 @@ const Profile = ({ onLinkClick }) => {
             <Link
               to="/login"
               onClick={handleDropdownLinkClick}
-              className="block px-4 py-2 hover:text-lightGray"
+              className="block px-4 py-2 hover:text-gray"
             >
               Login
             </Link>

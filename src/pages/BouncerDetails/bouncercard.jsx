@@ -5,20 +5,28 @@ import axios from "axios";
 import { getGuestId } from "../../utils/getGuestId.jsx";
 
 const BouncerCard = ({ bouncer }) => {
-  const rawBaseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:5858";
+  const rawBaseUrl =
+    import.meta.env.VITE_API_BASE_URL || "http://localhost:5858";
   const BASE_URL = rawBaseUrl.replace(/\/+$/, "") + "/api";
-       const  token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
   const AddToReservation = async (bouncerid) => {
-     const guestId = getGuestId();
-    console.log("Sending ID to backend:", bouncerid ,guestId ,token); 
+    const guestId = getGuestId();
+    console.log("Sending ID to backend:", bouncerid, guestId, token);
     try {
-        if(token){
-          const res = await axios.post(`${BASE_URL}/reservation/add`,{ bouncerid: bouncerid }, { headers: { Authorization: `Bearer ${token}` } });
-         alert(res.data.message || "Added to reservation successfully");
-        }else{
-             const res = await axios.post(`${BASE_URL}/reservation/add`, { bouncerid: bouncerid ,guestid: guestId,});
-      alert(res.data.message || "Added to reservation successfully");
-        }
+      if (token) {
+        const res = await axios.post(
+          `${BASE_URL}/reservation/add`,
+          { bouncerid: bouncerid },
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        alert(res.data.message || "Added to reservation successfully");
+      } else {
+        const res = await axios.post(`${BASE_URL}/reservation/add`, {
+          bouncerid: bouncerid,
+          guestid: guestId,
+        });
+        alert(res.data.message || "Added to reservation successfully");
+      }
     } catch (err) {
       console.error("Error adding reservation:", err);
       alert("Failed to add to reservation");
@@ -38,17 +46,31 @@ const BouncerCard = ({ bouncer }) => {
         </h2>
         <p className="text-gray-600 mt-1">Age: {bouncer.Age__c}</p>
         <p className="text-gray-600">Phone: {bouncer.Phone}</p>
-        <div className="mt-4 flex gap-2">
-          <Link to={`/book-bouncer/${bouncer._id}`} state={bouncer}>
-            <Button text="View Details" />
-          </Link>
-          <Link to="">
-            <Button text="Buy Now" />
-          </Link>
-          <Button
-            text="Add To Booking"
-            onclick={() => AddToReservation(bouncer._id)}
-          />
+        <div className="flex flex-col items-center gap-3 mt-4">
+          <div className="flex flex-col gap-3 mt-4">
+            {/* Top row: secondary buttons */}
+            <div className="flex gap-3 justify-center">
+              <Link to={`/book-bouncer/${bouncer._id}`} state={bouncer}>
+                <Button
+                  text="View Details"
+                  className="px-4 py-2 text-sm rounded-md border border-gray-300 text-black hover:bg-gray-100 transition"
+                />
+              </Link>
+              <Link to="">
+                <Button
+                  text="Buy Now"
+                  className="px-4 py-2 text-sm rounded-md border border-gray-300 text-black hover:bg-gray-100 transition"
+                />
+              </Link>
+            </div>
+
+            {/* Bottom row: primary button */}
+            <Button
+              text="Add To Booking"
+              onclick={() => AddToReservation(bouncer._id)}
+              className="w-full px-4 py-2 text-sm rounded-md bg-black text-white hover:bg-gray-800 transition"
+            />
+          </div>
         </div>
       </div>
     </div>

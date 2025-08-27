@@ -1,16 +1,32 @@
-import React from 'react'
+import React from "react";
 
-const Button = (props) => {
+const Button = ({
+  text,
+  onclick,
+  className = "",
+  variant = "solid", // solid or outline
+  disabled = false,
+}) => {
+  // base style (no hard padding/radius here so user can override)
+  const baseStyle =
+    "inline-flex items-center justify-center font-open-sans font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2";
 
-     const onclick = props.onclick
-    const text = props.text
+  const styles = {
+    solid:
+      "bg-black text-white hover:bg-gray focus:ring-black disabled:bg-lightGray disabled:text-white disabled:cursor-not-allowed",
+    outline:
+      "border border-black text-black hover:bg-black hover:text-white focus:ring-black disabled:border-lightGray disabled:text-lightGray disabled:cursor-not-allowed",
+  };
 
   return (
-    <div>
-     <button onClick={onclick} className="bg-lightGray hover:bg-black border text-black hover:text-white hover:opacity-70  px-6 py-3 rounded-full transition font-open-sans font-medium md:text-xl text-sm">{text}</button>
-      
-    </div>
-  )
-}
+    <button
+      onClick={onclick}
+      disabled={disabled}
+      className={`${baseStyle} ${styles[variant]} ${className}`}
+    >
+      {text}
+    </button>
+  );
+};
 
-export default Button
+export default Button;

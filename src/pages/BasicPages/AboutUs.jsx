@@ -100,7 +100,9 @@ const AboutUs = () => {
             Book professional bouncers easily, reliably, and affordably.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-6">
-             <Button text="Book Now"/>
+             <Button text="Book Now"
+              className = "w-40 px-6 py-3 text-base rounded-full"
+             />
             <button className="border border-white py-3 px-10 rounded-full font-semibold text-white hover:text-black bg-black hover:bg-lightGray transition">
               Get in Touch
             </button>

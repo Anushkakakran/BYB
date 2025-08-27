@@ -81,12 +81,25 @@ const BouncerDetails = () => {
             address={bouncer.ShippingAddress}
           />
         </div>
-             <Link to="">
-          <Button text="Buy Now" />
-        </Link>
-        <Link>
-          <Button text="Add To Booking" onclick={()=>AddToReservation(bouncer._id)} />
-        </Link>
+        <div className="flex justify-center items-center gap-4 mt-6 mb-6">
+  {/* Buy Now button */}
+  <Link to="">
+    <Button
+      text="Buy Now"
+      className="w-40 px-6 py-3 text-base rounded-md"
+    />
+  </Link>
+
+  {/* Add To Booking button */}
+  <Link to="">
+    <Button
+      text="Add To Booking"
+      onclick={() => AddToReservation(bouncer._id)}
+      className="w-46 px-6 py-3 text-base rounded-md"
+    />
+  </Link>
+</div>
+
       </div>    
     </div>
   );

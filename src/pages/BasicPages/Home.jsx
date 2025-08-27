@@ -45,7 +45,9 @@ const heroImages = [hero1, hero2, hero3, hero4, hero5];
                 weddings, corporate events, and more.
               </p>
               <Link to="/contact">
-                <Button text = "Book Now"/>
+                <Button text = "Book Now"
+                  className = "w-40 px-6 py-3 text-base rounded-md "
+                />
               </Link>
             </div>
           </div>
@@ -89,7 +91,9 @@ const heroImages = [hero1, hero2, hero3, hero4, hero5];
           Professional Security Services for Every Occasion
         </p>
         <Link to="/Book-Bouncer">
-          <Button text="Book Now" />
+          <Button text="Book Now" 
+            className = "w-40 px-6 py-3 text-base rounded-md text-white bg-gray hover:bg-lightGray hover:text-gray transition-all"
+          />
         </Link>
       </section>
 
@@ -156,29 +160,30 @@ const heroImages = [hero1, hero2, hero3, hero4, hero5];
         <h2 className="text-2xl sm:text-3xl font-semibold mb-6">Ready to Secure Your Event?</h2>
         <p className="mb-6">Book trained and verified bouncers in just a few clicks.</p>
         <Link to="/Book-Bouncer">
-          <Button text="Book Your Bouncer" />
+          <Button text="Book Your Bouncer"
+          className = "w-56 px-6 py-3 text-base rounded-md text-white bg-gray hover:bg-lightGray hover:text-gray transition-all" />
         </Link>
       </section>
 
       {/* Featured Bouncers Section */}
-      <section className="bg-whit py-16 px-4 text-center mb-16">
-        <h2 className="text-3xl font-semibold text-darkBlue mb-12">Featured Bouncers</h2>
+      <section className="bg-white py-16 px-4 text-center mb-16">
+        <h2 className="text-3xl font-semibold text-black mb-12">Featured Bouncers</h2>
         <div className="max-w-6xl mx-auto grid gap-12 sm:grid-cols-2 md:grid-cols-3">
           {[
             {
               name: "Mike",
               role: "Head Bouncer",
-              icon: <FaUser className="w-16 h-16 text-darkBlue" />,
+              icon: <FaUser className="w-16 h-16 text-black" />,
             },
             {
               name: "Liam",
               role: "Security Expert",
-              icon: <FaUser className="w-16 h-16 text-darkBlue" />,
+              icon: <FaUser className="w-16 h-16 text-black" />,
             },
             {
               name: "Sophia",
               role: "VIP Protection",
-              icon: <FaUser className="w-16 h-16 text-darkBlue" />,
+              icon: <FaUser className="w-16 h-16 text-black" />,
             },
           ].map((bouncer, index) => (
             <div key={index} className="bg-white p-6 rounded-lg shadow-lg text-center">
@@ -186,7 +191,7 @@ const heroImages = [hero1, hero2, hero3, hero4, hero5];
                 {bouncer.icon}
               </div>
               <h3 className="font-semibold text-lg mb-2">{bouncer.name}</h3>
-              <p className="text-sm text-royalBlue">{bouncer.role}</p>
+              <p className="text-sm text-black">{bouncer.role}</p>
             </div>
           ))}
         </div>

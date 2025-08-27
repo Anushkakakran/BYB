@@ -3,25 +3,34 @@ import { HiMenu } from "react-icons/hi";
 import FilterSidebar from "../Book/Filters/filterSidebar.jsx";
 import BouncerCard from "../BouncerDetails/bouncercard.jsx";
 import Calender from "../Book/Calendar/calender.jsx";
-import Location from "../Book/Filters/Location.jsx"; 
+import Location from "../Book/Filters/Location.jsx";
 import SubLocation from "../Book/Filters/SubLocation.jsx";
 
 const Book = () => {
   const [Filterbouncer, setFilterbouncer] = useState([]);
-  const [selectedLocation, setSelectedLocation] = useState(null);
-  const [selectedRange, setSelectedRange] = useState({ from: undefined, to: undefined });
+  const [selectedLocations, setSelectedLocations] = useState([]);
+  const [selectedRange, setSelectedRange] = useState({
+    from: undefined,
+    to: undefined,
+  });
   const [shift, setShift] = useState("");
-  const [visible, setVisible] = useState(false); 
+  const [visible, setVisible] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [showMenuButton, setShowMenuButton] = useState(true);
 
   const handleBouncerData = useCallback((bouncer) => {
     setFilterbouncer(bouncer);
   }, []);
+  const handleSelectloc = useCallback((locationsObj) => {
+    const activeCities = Object.keys(locationsObj).filter(
+      (city) => locationsObj[city]
+    );
+    setSelectedLocations(activeCities);
+  }, []);
 
   const handleContinue = () => {
     const payload = {
-      location: selectedLocation,
+      location: selectedLocations,
       dateRange: selectedRange,
       shift: shift,
     };
@@ -65,7 +74,10 @@ const Book = () => {
         } 
           md:translate-x-0 md:sticky md:top-16 md:h-[calc(100vh-4rem)] md:overflow-y-auto`}
       >
-        <FilterSidebar onchecked={handleBouncerData} onClose={() => setIsSidebarOpen(false)} />
+        <FilterSidebar
+          onchecked={handleBouncerData}
+          onClose={() => setIsSidebarOpen(false)}
+        />
       </div>
 
       {/* Main Content */}
@@ -79,23 +91,22 @@ const Book = () => {
           {/* Location Input */}
           <div className="relative w-64">
             <Location
-              onLocationSelect={(loc) => {
-                setSelectedLocation(loc);
-                handleBouncerData([]); // reset bouncer list for now
-              }}
+              onchecked={handleBouncerData}
+              islocation={handleSelectloc}
             />
           </div>
 
           {/* Sub-Location Input (only shows after city selected) */}
-          {selectedLocation && (
+          {selectedLocations.length > 0 && (
             <div className="relative w-64">
               <SubLocation
-                isChecked={{ [selectedLocation]: true }}
+                isChecked={Object.fromEntries(
+                  selectedLocations.map((city) => [city, true])
+                )}
                 onchecked={handleBouncerData}
               />
             </div>
           )}
-
           {/* Date-Time */}
           <div className="relative w-64">
             <div

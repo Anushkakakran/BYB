@@ -18,7 +18,7 @@ const SubLocation = ({ isChecked = {}, onchecked = () => {} }) => {
       { label: "Andheri", key: "Andheri" },
     ],
   };
-
+``
   const selectedCities = Object.keys(subLocationData).filter((city) => isChecked[city]);
 
   const [allBouncers, setAllBouncers] = useState([]);
@@ -28,7 +28,6 @@ const SubLocation = ({ isChecked = {}, onchecked = () => {} }) => {
   const dropdownRef = useRef(null);
 
   const allSubLocations = selectedCities.flatMap((city) => subLocationData[city] || []);
-
   const filteredSubLocations = allSubLocations.filter((loc) =>
     loc.label.toLowerCase().includes(query.toLowerCase())
   );
@@ -74,6 +73,9 @@ const SubLocation = ({ isChecked = {}, onchecked = () => {} }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // ✅ Get selected sublocations for input display
+  const selectedSubLocations = Object.keys(subarea).filter((loc) => subarea[loc]);
+
   return (
     <div className="relative w-full max-w-sm mx-auto" ref={dropdownRef}>
       {/* Input Field */}
@@ -84,11 +86,8 @@ const SubLocation = ({ isChecked = {}, onchecked = () => {} }) => {
         <FaMapMarkerAlt className="text-gray-500 mr-2" />
         <input
           type="text"
-          value={query}
-          onChange={(e) => {
-            setQuery(e.target.value);
-            setShowDropdown(true);
-          }}
+          readOnly
+          value={selectedSubLocations.join(", ")}
           placeholder="Select Sub-Location"
           className="w-full outline-none text-gray-700 placeholder-gray-400 cursor-pointer"
         />
@@ -97,6 +96,17 @@ const SubLocation = ({ isChecked = {}, onchecked = () => {} }) => {
       {/* Dropdown */}
       {showDropdown && (
         <div className="absolute top-full left-0 mt-1 w-full bg-white border rounded-lg shadow-lg max-h-60 overflow-y-auto z-50">
+          {/* Search inside dropdown */}
+          <div className="px-3 py-2 border-b">
+            <input
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search sub-locations..."
+              className="w-full border px-2 py-1 rounded-md outline-none text-gray-700"
+            />
+          </div>
+
           {filteredSubLocations.length > 0 ? (
             filteredSubLocations.map(({ label, key }) => (
               <label

@@ -1,21 +1,41 @@
 import React, { useState } from "react";
 import Button from "../../Components/Button";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 const ForgetPassword = () => {
+const rawBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5858';
+const BASE_URL = rawBaseUrl.replace(/\/+$/, '') + '/api';
   const [email, setEmail] = useState("");
-  const [otp, setOtp] = useState("");
-  const [newPassword, setNewPassword] = useState("");
+  const [OTP, setOtp] = useState("");
+  const [password, setNewPassword] = useState("");
+  const [disable,setdisable] = useState(false)
 
-  const handleGetOtp = () => {
-    alert("OTP sent to " + email);
+  const handleGetOtp = async() => {
+         setdisable(true);
+         try {
+                 const res = await axios.post(`${BASE_URL}/forgetpassword/checkUser`,{email});
+             alert(res.data.message);
+         } catch (error) {
+                alert(error);
+         }
   };
 
-  const handleVerifyOtp = () => {
-    alert("OTP verified: " + otp);
+  const handleVerifyOtp = async() => {
+    setdisable(true)
+            try{ const res = await axios.post(`${BASE_URL}/forgetpassword/checkOtp`,{email,OTP});
+             alert(res.data.message);
+  }catch(error){
+    alert(error);
+  }
   };
 
-  const handleChangePassword = () => {
-    alert("Password changed successfully!");
+  const handleChangePassword = async() => {
+     try{const res = await axios.post(`${BASE_URL}/forgetpassword/updatepass`,{email,OTP,password});
+             alert(res.data.message);}
+             catch(error){
+              alert(error);
+             }
   };
 
   return (
@@ -31,6 +51,7 @@ const ForgetPassword = () => {
           <input
             type="email"
             placeholder="Enter your email"
+            disabled = {disable}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="flex-1 border border-gray px-4 py-3 text-sm rounded-lg transition"
@@ -47,7 +68,8 @@ const ForgetPassword = () => {
           <input
             type="text"
             placeholder="Enter OTP"
-            value={otp}
+            disabled={disable}
+            value={OTP}
             onChange={(e) => setOtp(e.target.value)}
             className="flex-1 border border-gray px-4 py-3 text-sm rounded-lg transition"
           />
@@ -63,12 +85,20 @@ const ForgetPassword = () => {
           <input
             type="password"
             placeholder="New Password"
-            value={newPassword}
+            value={password}
             onChange={(e) => setNewPassword(e.target.value)}
             className="w-full border border-gray px-4 py-3 text-sm rounded-lg transition"
           />
         </div>
-
+   {/* Back to login */}
+        <div className="text-right mb-4">
+             <Link
+               to="/login"
+               className="text-green text-sm hover:underline"
+             >
+               Login?
+             </Link>
+           </div>
         {/* Change Password */}
         <div>
           <Button
